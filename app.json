@@ -1,0 +1,12 @@
+{
+  "name": "krogkollen",
+  "displayName": "krogkollen",
+  "expo": {
+    "name": "krogkollen",
+    "slug": "krogkollen",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
