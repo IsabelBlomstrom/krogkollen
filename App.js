@@ -9,9 +9,10 @@ import {
 } from '@expo-google-fonts/montserrat';
 
 export default function App() {
-  useFonts({
+  useFonts({ // lägg i en useEffect
     Montserrat_400Regular,
   });
+  useFonts();
 
   return (
     <ApplicationProvider {...eva} 

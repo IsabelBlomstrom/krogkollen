@@ -1,28 +1,50 @@
 
 import React, { useState} from 'react';
-import * as eva from '@eva-design/eva';
-import { StyleSheet } from 'react-native';
-import { Layout, Text, Select, SelectItem, IndexPath } from '@ui-kitten/components';
+import { StyleSheet, Image } from 'react-native';
+import { Layout, Text, Select, SelectItem, Button} from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 
+const cities =  [
+    "Göteborg",
+    "Stockholm",
+    "Malmö"
+]
 export default function LandingPage() {
 
-const [selectedIndex, setSelectedIndex] = useState();
+const [selectedIndex, setSelectedIndex] = useState({
+    title: '',
+});
 
+const renderOptions = (title) => (
+    <SelectItem key={title} title={title} />
+  );
 return (
     <Layout style={styles.container}>
-        <Layout style={styles.highLightBox}>
-        <Text style={{margin: 40, textAlign: 'center', fontFamily: 'Montserrat_400Regular', color:"white"}}>Välj stad
-        </Text>
+        <Image
+          style={styles.imgLogo}
+          resizeMode="contain"
+          source={require('../assets/images/logo.png')}
+        />
+        <Text style={styles.text}>Välj stad</Text>
             <Select
-                style={styles.select}
-                selectedIndex={selectedIndex}
-                onSelect={title => setSelectedIndex(title)}>
-                <SelectItem title='Göteborg'/>
-                <SelectItem title='Stockholm'/>
-                <SelectItem title='Malmö'/>
+                    placeholder="Välj stad"
+                    size="large"
+                    style={styles.select}
+                    value={selectedIndex.cities}
+                    onSelect={(index) => {
+                        setSelectedIndex({
+                        cities: cities[index.row],
+                        });
+                    }}>
+                    {cities.map(renderOptions)}
             </Select>
-        </Layout>
+        <Button 
+            size="medium"
+            style={styles.button}>
+            <Text
+                category="h6" 
+                style={styles.buttonText}>Gå vidare</Text>
+        </Button>
     </Layout>
 )
 }
@@ -31,23 +53,30 @@ const styles = StyleSheet.create({
 container: {
     flex: 1,
     backgroundColor: '#fac3be',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: theme['color-primary-100'],
+    alignContent: "center",
 },
-buttonStyle: {
-    backgroundColor: theme['color-info-500'],
-    borderWidth: 0,
-    width: 100,
-    height: 40,
-    alignSelf: 'center',
-    margin: 10,
+imgLogo: {
+    alignSelf: "center",
+    marginTop: 50, 
 },
 select: {
-    borderWidth: 0,
+    width: 300,
+    alignSelf: "center",
 },
-highLightBox: {
-    backgroundColor: theme['color-primary-100'],
-    margin: 2,
+button: {
+    marginTop: 40,
+    backgroundColor: theme['color-info-500'],
+    marginHorizontal: 10,
+},
+text: {
+    marginBottom: 20,
+    marginLeft: 15,
+    fontFamily: 'Montserrat_400Regular', 
+    color:"white"
+},
+buttonText: {
+    fontFamily: 'Montserrat_400Regular',
+    margin: 0,
 },
 })
