@@ -9,7 +9,12 @@ const cities =  [
     "Stockholm",
     "Malmö"
 ]
-export default function LandingPage() {
+export const LandingPage = ({ navigation }) => {
+
+    const navigateDetails = () => {
+      navigation.navigate('HomePage');
+    };
+  
 
 const [selectedIndex, setSelectedIndex] = useState({
     title: '',
@@ -40,7 +45,11 @@ return (
             </Select>
         <Button 
             size="medium"
-            style={styles.button}>
+            style={styles.button}
+            onPress={() => {
+                navigateDetails();
+              }}
+            >
             <Text
                 category="h6" 
                 style={styles.buttonText}>Gå vidare</Text>
@@ -52,7 +61,6 @@ return (
 const styles = StyleSheet.create({
 container: {
     flex: 1,
-    backgroundColor: '#fac3be',
     backgroundColor: theme['color-primary-100'],
     alignContent: "center",
 },

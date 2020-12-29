@@ -2,11 +2,11 @@ import React from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider} from '@ui-kitten/components';
 import { default as theme } from './AppTheme.json'; // <-- Import app theme
-import LandingPage from './src/scenes/landingPage';
 import {
   useFonts,
   Montserrat_400Regular,
 } from '@expo-google-fonts/montserrat';
+import {AppNavigator} from './src/navigation/appNavigation';
 
 export default function App() {
   useFonts({ // lägg i en useEffect
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <ApplicationProvider {...eva} 
     theme={{ ...eva.dark, ...theme }}>
-      <LandingPage />
+      <AppNavigator/>
     </ApplicationProvider>
   );
 }
