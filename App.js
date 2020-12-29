@@ -1,22 +1,22 @@
-import { Divider } from '@ui-kitten/components';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider} from '@ui-kitten/components';
+import { default as theme } from './AppTheme.json'; // <-- Import app theme
+import LandingPage from './src/scenes/landingPage';
+import {
+  useFonts,
+  Montserrat_400Regular,
+} from '@expo-google-fonts/montserrat';
 
 export default function App() {
+  useFonts({
+    Montserrat_400Regular,
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApplicationProvider {...eva} 
+    theme={{ ...eva.dark, ...theme }}>
+      <LandingPage />
+    </ApplicationProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fac3be',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
