@@ -7,6 +7,7 @@ import PubCard from '../components/pubCard';
 
 export default function HomePage({ navigation }) {
 
+
     return(
         <Layout style={styles.container}>
             <PubCard navigation={navigation}/>
@@ -24,6 +25,15 @@ container: {
 text: {
     alignSelf: "center",
     fontFamily: 'Montserrat_400Regular', 
+},
+button: {
+    marginTop: 40,
+    backgroundColor: theme['color-info-500'],
+    marginHorizontal: 10,
+},
+buttonText: {
+    fontFamily: 'Montserrat_400Regular',
+    margin: 0,
 },
 })
 
