@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 import {AppNavigator} from './src/navigation/appNavigation';
 
+
 export default function App() {
   useFonts({ // lägg i en useEffect
     Montserrat_400Regular,
