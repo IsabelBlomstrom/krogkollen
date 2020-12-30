@@ -1,16 +1,15 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout, Text} from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
+import PubCard from '../components/pubCard';
 
 
 export default function HomePage({ navigation }) {
 
     return(
         <Layout style={styles.container}>
-            <Text 
-            style={styles.text}
-            category="h3">HEJJJ</Text>
+            <PubCard navigation={navigation}/>
         </Layout>
     )
 }
