@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from '../scenes/homePage';
 import {LandingPage} from '../scenes/landingPage';
+import DetailPage from '../scenes/detailPage';
 
 const { Navigator, Screen } = createStackNavigator();
 

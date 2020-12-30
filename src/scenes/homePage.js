@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Text} from '@ui-kitten/components';
+import { Layout, Text, Button} from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 
 
 export default function HomePage({ navigation }) {
+
 
     return(
         <Layout style={styles.container}>
@@ -25,6 +26,15 @@ container: {
 text: {
     alignSelf: "center",
     fontFamily: 'Montserrat_400Regular', 
+},
+button: {
+    marginTop: 40,
+    backgroundColor: theme['color-info-500'],
+    marginHorizontal: 10,
+},
+buttonText: {
+    fontFamily: 'Montserrat_400Regular',
+    margin: 0,
 },
 })
 
