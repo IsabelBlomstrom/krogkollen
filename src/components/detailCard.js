@@ -19,10 +19,6 @@ export default function DetailCard({ navigation }) {
   return (
     <ScrollView>
     <Layout style={styles.container}>
-        <Layout style={styles.rowBox}>
-          <Text style={styles.text}>Listvy</Text>
-          <Text style={styles.text}>Kartvy</Text>
-        </Layout>
 
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
@@ -71,13 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme['color-primary-100'],
     padding: '4%'
-
-  },
-  rowBox: {
-    marginTop: 50,
-    backgroundColor: theme['color-primary-100'],
-    flexDirection: 'row',
-    justifyContent: 'space-around',
 
   },
   box: {

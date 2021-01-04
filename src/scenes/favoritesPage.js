@@ -1,21 +1,19 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Layout, Text } from '@ui-kitten/components'
-import { default as theme } from '../../AppTheme.json' // <-- Import app theme
-import DetailCard from "../components/detailCard"
+import { Layout, Text } from '@ui-kitten/components';
+import FavoriteCard from '../components/favoriteCard'
+import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 
 
-export default function DetailPage({navigation}) {
+export default function FavoritesPage({navigation}) {
 
   return(
-
     <Layout style={styles.container}>
-              <Layout style={styles.rowBox}>
-          <Text style={styles.textCurrent}>Listvy</Text>
-          <Text style={styles.text}>Kartvy</Text>
+        <Layout style={styles.rowBox}>
+          <Text style={styles.text}>Favoriter</Text>
         </Layout>
-      <DetailCard navigation={navigation} />
-    </Layout>
+    <FavoriteCard navigation={navigation}/>
+  </Layout>
   )
 }
 
@@ -32,15 +30,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Montserrat_400Regular',
-    paddingTop: '3%'
-  },
-  textCurrent: {
-    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
     color: theme['color-info-500'],
     textDecorationLine: 'underline'
-  }
+  },
 })
-
-
-

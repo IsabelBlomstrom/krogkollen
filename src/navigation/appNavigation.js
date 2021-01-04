@@ -1,12 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 import { LandingPage } from '../scenes/landingPage';
-import DetailCard from '../components/detailCard';
+import DetailPage from '../scenes/detailPage';
+import FavoritesPage from '../scenes/favoritesPage'
+import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { TabNavigator } from '../navigation/bottomNavigator';
-import HomePage from '../scenes/homePage';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 const { Navigator, Screen } = createStackNavigator();
@@ -14,8 +13,9 @@ const { Navigator, Screen } = createStackNavigator();
 const HomeNavigator = () => (
   <Navigator headerMode='none' initialRouteName="LandingPage">
     <Screen name='LandingPage' component={LandingPage}/>
+    <Screen name="DetailPage" component={DetailPage}/>
+    <Screen name="FavoritesPage" component={FavoritesPage}/>
     <Screen name='HomePage' component={TabNavigator}/>
-    <Screen name="DetailPage" component={DetailCard}/>
   </Navigator>
 );
 
