@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 import { Layout, Text, Button } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
+import PubCard2 from '../components/pubCard2'
+import PubCard3 from '../components/pubCard3'
+import Header from '../components/header'
 
 
 export default function HomePage({ navigation }) {
@@ -13,12 +16,14 @@ export default function HomePage({ navigation }) {
 
     return(
         <Layout style={styles.container}>
-                <Layout style={styles.rowBox}>
-                <Text style={styles.textCurrent}>Listvy</Text>
-          <Text style={styles.text}>Kartvy</Text>
+            <Header/>
+         <Layout style={styles.rowBox}>
+             <Text style={styles.textCurrent}>Listvy</Text>
+             <Text style={styles.text}>Kartvy</Text>
         </Layout>
             <PubCard navigation={navigation}/>
-            <PubCard navigation={navigation}/>
+            <PubCard2 navigation={navigation}/>
+            <PubCard3 navigation={navigation}/>
 
             <Button 
             size="medium"
@@ -39,9 +44,8 @@ export default function HomePage({ navigation }) {
 const styles = StyleSheet.create({
 container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: theme['color-primary-100'],
-    alignContent: "center",
+    justifyContent: "center"
 },
 button: {
     marginBottom: 100,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import { Layout, Text, Button } from '@ui-kitten/components'
+import { Layout, Text, Button, Icon } from '@ui-kitten/components'
 import * as Linking from 'expo-linking'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 
