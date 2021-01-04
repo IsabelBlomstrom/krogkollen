@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
 container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
-    justifyContent: "center"
 },
 button: {
     marginBottom: 100,

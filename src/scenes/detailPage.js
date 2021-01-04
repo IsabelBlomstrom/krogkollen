@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 import { Layout, Text } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 import DetailCard from "../components/detailCard"
+import Header from '../components/header'
 
 
 export default function DetailPage({navigation}) {
@@ -10,6 +11,7 @@ export default function DetailPage({navigation}) {
   return(
 
     <Layout style={styles.container}>
+      <Header/>
               <Layout style={styles.rowBox}>
           <Text style={styles.textCurrent}>Listvy</Text>
           <Text style={styles.text}>Kartvy</Text>

@@ -17,8 +17,9 @@ export default function Header() {
       source={require('../assets/images/logo.png')}
     />
   <Input  
-        placeholder="Type Here..."
-        captionIcon={SearchIcon}
+        style={styles.input}
+        placeholder="Sök ..."
+        accessoryRight={SearchIcon}
         />
    </Layout>
 
@@ -27,13 +28,21 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 200,
     backgroundColor: theme['color-primary-100'],
     flexDirection: "column",
+    justifyContent: 'space-evenly',
+    alignItems:'center',
+    position: 'relative',
+    top: 20
 },
   imgLogo: {
-    alignSelf: "center",
-    padding: 0,
     height: 200
 },
+input: {
+  marginHorizontal: 10,
+  position: 'relative',
+  top: -20,
+  borderRadius: 15
+}
 })
