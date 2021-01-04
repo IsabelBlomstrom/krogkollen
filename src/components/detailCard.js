@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { Layout, Text, Button } from '@ui-kitten/components'
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { Layout, Text, Button, Icon } from '@ui-kitten/components'
 import * as Linking from 'expo-linking'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 
@@ -13,11 +13,11 @@ export default function DetailCard({ navigation }) {
   };
   const handlePress = () => {
     Linking.openURL('https://www.olkompaniet.com/');
-
   }
 
-  
+
   return (
+    <ScrollView>
     <Layout style={styles.container}>
         <Layout style={styles.rowBox}>
           <Text style={styles.text}>Listvy</Text>
@@ -61,6 +61,8 @@ export default function DetailCard({ navigation }) {
                 >Tillbaka</Text>
         </Button>
   </Layout>
+  </ScrollView>
+
   )
 }
 
