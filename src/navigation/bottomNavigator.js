@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Icon} from '@ui-kitten/components';
 import HomePage from '../scenes/homePage';
-import DetailCard from '../components/detailCard';
+import FavoritesPage from '../scenes/favoritesPage';
 import { LandingPage } from '../scenes/landingPage';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -31,9 +31,9 @@ const BottomTabBar = ({ navigation, state }) => (
 
 export const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
-    <Screen name='Landing' component={LandingPage}/>
+    <Screen name='LandingPage' component={LandingPage}/>
     <Screen name='HomePage' component={HomePage}/>
-    <Screen name='Detaljer' component={DetailCard} />
+    <Screen name='Detaljer' component={FavoritesPage} />
   </Navigator>
 );
 

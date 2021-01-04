@@ -1,11 +1,11 @@
 import React from 'react'
-import { Layout, Input } from '@ui-kitten/components';
+import { Layout, Input, Icon } from '@ui-kitten/components';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 
-// const SearchIcon = (props) => (
-//   <Icon {...props} name='search-outline'/>
-// );
+const SearchIcon = (props) => (
+  <Icon {...props} name='search-outline'/>
+);
 
 export default function Header() {
 
@@ -16,10 +16,10 @@ export default function Header() {
       resizeMode="contain"
       source={require('../assets/images/logo.png')}
     />
-  {/* <Input  
+  <Input  
         placeholder="Type Here..."
         captionIcon={SearchIcon}
-        /> */}
+        />
    </Layout>
 
   )
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
 },
   imgLogo: {
     alignSelf: "center",
-    padding: 0
+    padding: 0,
+    height: 200
 },
 })

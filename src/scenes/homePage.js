@@ -10,10 +10,6 @@ import Header from '../components/header'
 
 export default function HomePage({ navigation }) {
 
-    const navigateDetails = () => {
-        navigation.navigate('FavoritesPage');
-      };
-
     return(
         <Layout style={styles.container}>
             <Header/>
@@ -24,18 +20,6 @@ export default function HomePage({ navigation }) {
             <PubCard navigation={navigation}/>
             <PubCard2 navigation={navigation}/>
             <PubCard3 navigation={navigation}/>
-
-            <Button 
-            size="medium"
-            style={styles.button}
-            onPress={() => {
-                navigateDetails();
-              }}
-            >
-            <Text
-                category="h6" 
-                style={styles.buttonText}>Favoriter</Text>
-        </Button>
 
         </Layout>
     )
