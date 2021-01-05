@@ -33,35 +33,35 @@ export default function PubCard({ navigation }) {
 } 
 
 const styles = StyleSheet.create({
-container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: theme['color-primary-100'],
-    alignContent: "center",
-    flexDirection: "column",
-    marginBottom: '5%'
-},
-text: {
-    fontFamily: 'Montserrat_400Regular', 
-    marginVertical: 10,
-    marginHorizontal: 10,
-},
-quantity: {
-  fontFamily: 'Montserrat_400Regular', 
-  marginVertical: 10,
-  marginHorizontal: 10,
-  color: theme['color-danger-400']
-},
-pubCard: {
-    backgroundColor: theme['color-primary-500'],
-    marginHorizontal: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderRadius: 5,
-    padding: 10,
-},
-imgLogo: {
-    height: 100,
-    width: 100,
-},
-})
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        backgroundColor: theme['color-primary-100'],
+        alignContent: "center",
+        flexDirection: "column",
+    },
+    text: {
+        fontFamily: 'Montserrat_400Regular', 
+        marginVertical: 10,
+        marginHorizontal: 10,
+    },
+    quantity: {
+        fontFamily: 'Montserrat_400Regular', 
+        marginVertical: 10,
+        marginHorizontal: 10,
+        color: theme['color-danger-400']
+    },
+    pubCard: {
+        backgroundColor: theme['color-primary-500'],
+        marginHorizontal: 10,
+        marginVertical: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderRadius: 5,
+        padding: 10,
+    },
+    imgLogo: {
+        height: 100,
+        width: 100,
+    },
+    })
