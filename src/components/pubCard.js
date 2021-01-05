@@ -54,6 +54,7 @@ quantity: {
 pubCard: {
     backgroundColor: theme['color-primary-500'],
     marginHorizontal: 10,
+    marginVertical: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 5,

@@ -4,17 +4,20 @@ import { Layout, Text } from '@ui-kitten/components';
 import FavoriteCard from '../components/favoriteCard'
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import Header from '../components/header'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function FavoritesPage({navigation}) {
 
   return(
     <Layout style={styles.container}>
-      <Header/>
-        <Layout style={styles.rowBox}>
-          <Text style={styles.text}>Favoriter</Text>
-        </Layout>
-    <FavoriteCard navigation={navigation}/>
+      <ScrollView>
+        <Header/>
+          <Layout style={styles.rowBox}>
+            <Text style={styles.text}>Favoriter</Text>
+          </Layout>
+      <FavoriteCard navigation={navigation}/>
+    </ScrollView>
   </Layout>
   )
 }

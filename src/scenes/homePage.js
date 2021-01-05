@@ -6,22 +6,25 @@ import PubCard from '../components/pubCard';
 import PubCard2 from '../components/pubCard2'
 import PubCard3 from '../components/pubCard3'
 import Header from '../components/header'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function HomePage({ navigation }) {
 
     return(
-        <Layout style={styles.container}>
-            <Header/>
-         <Layout style={styles.rowBox}>
-             <Text style={styles.textCurrent}>Listvy</Text>
-             <Text style={styles.text}>Kartvy</Text>
-        </Layout>
-            <PubCard navigation={navigation}/>
-            <PubCard2 navigation={navigation}/>
-            <PubCard3 navigation={navigation}/>
+        <ScrollView>
+            <Layout style={styles.container}>
+                <Header/>
+            <Layout style={styles.rowBox}>
+                <Text style={styles.textCurrent}>Listvy</Text>
+                <Text style={styles.text}>Kartvy</Text>
+            </Layout>
+                <PubCard navigation={navigation}/>
+                <PubCard2 navigation={navigation}/>
+                <PubCard3 navigation={navigation}/>
 
-        </Layout>
+            </Layout>
+        </ScrollView>
     )
 }
 

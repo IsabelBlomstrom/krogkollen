@@ -19,7 +19,6 @@ export default function DetailCard({ navigation }) {
   return (
     <ScrollView>
     <Layout style={styles.container}>
-
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
             <Text style={styles.text}>Här kan det stå lite text om stället som 
@@ -55,18 +54,6 @@ export default function DetailCard({ navigation }) {
         <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
         <Icon name="star-outline" fill="#FE9C41" style={styles.star}/>
         </Layout>
-
-    <Button 
-            size="medium"
-            style={styles.button}
-            onPress={() => {
-                navigateDetails()
-              }}
-            >
-            <Text
-                category="h6" 
-                >Tillbaka</Text>
-        </Button>
   </Layout>
   </ScrollView>
 
