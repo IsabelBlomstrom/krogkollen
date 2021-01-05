@@ -35,7 +35,7 @@ export const LandingPage = ({ navigation }) => {
         />
         <Text style={styles.text}>Välj stad</Text>
             <Select
-                    placeholder="Välj stad"
+                    placeholder={cities[0]}
                     size="large"
                     style={styles.select}
                     value={selectedIndex.cities}
