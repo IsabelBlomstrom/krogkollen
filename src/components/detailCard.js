@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { Layout, Text, Button, Icon } from '@ui-kitten/components'
 import * as Linking from 'expo-linking'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
@@ -30,6 +30,12 @@ export default function DetailCard({ navigation }) {
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
         </Layout>
+
+        <Image
+                    style={styles.imgLogo}
+                    resizeMode="contain"
+                    source={require('../assets/images/olkompaniet.png')}
+                />
 
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Hur många är här?</Text>
@@ -83,6 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  imgLogo: {
+    height: 100,
+    width: 100,
+    alignSelf: 'flex-end',
+    marginHorizontal: 30
   },
   statusBar: {
     flexDirection: 'row',

@@ -39,7 +39,6 @@ container: {
     backgroundColor: theme['color-primary-100'],
     alignContent: "center",
     flexDirection: "column",
-    marginBottom: '5%'
 },
 text: {
     fontFamily: 'Montserrat_400Regular', 
