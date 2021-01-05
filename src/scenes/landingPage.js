@@ -9,6 +9,7 @@ const cities =  [
     "Stockholm",
     "Malmö"
 ]
+
 export const LandingPage = ({ navigation }) => {
 
     const navigateDetails = () => {
@@ -16,15 +17,17 @@ export const LandingPage = ({ navigation }) => {
     };
   
 
-const [selectedIndex, setSelectedIndex] = useState({
-    title: '',
-});
+    const [selectedIndex, setSelectedIndex] = useState({
+        title: '',
+    });
 
-const renderOptions = (title) => (
-    <SelectItem key={title} title={title} />
-  );
-return (
-    <Layout style={styles.container}>
+    const renderOptions = (title) => (
+        <SelectItem key={title} title={title} />
+    );
+
+
+    return (
+        <Layout style={styles.container}>
         <Image
           style={styles.imgLogo}
           resizeMode="contain"
@@ -43,20 +46,40 @@ return (
                     }}>
                     {cities.map(renderOptions)}
             </Select>
-        <Button 
-            size="medium"
-            style={styles.button}
-            onPress={() => {
-                navigateDetails();
-              }}
-            >
-            <Text
-                category="h6" 
-                style={styles.buttonText}>Gå vidare</Text>
-        </Button>
-    </Layout>
-)
+        {selectedIndex.cities === 'Malmö' || selectedIndex.cities === 'Stockholm' ? (
+                <Layout style={{backgroundColor: theme['color-primary-100']}}>
+                <Text style={{color: theme['color-danger-400'], marginHorizontal: 15, paddingTop: 15}}>Kommer inom kort</Text>
+                <Button 
+                disabled="true"
+                size="medium"
+                style={styles.button}
+                >
+                <Text
+                    category="h6" 
+                    style={styles.buttonText}>Gå vidare</Text>
+                </Button>
+                </Layout>
+            ) : ( 
+                <Button 
+
+                size="medium"
+                style={styles.button}
+                onPress={() => {
+                    navigateDetails();
+                }}
+                >
+                <Text
+                    category="h6" 
+                    style={styles.buttonText}>Gå vidare</Text>
+              </Button>
+             )}
+
+      </Layout>
+   )     
 }
+
+
+
 
 const styles = StyleSheet.create({
 container: {
@@ -79,7 +102,7 @@ button: {
 },
 text: {
     marginBottom: 20,
-    marginLeft: 15,
+    marginHorizontal: 15,
     fontFamily: 'Montserrat_400Regular', 
     color:"white"
 },
