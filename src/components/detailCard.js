@@ -19,22 +19,25 @@ export default function DetailCard({ navigation }) {
   return (
     <ScrollView>
     <Layout style={styles.container}>
-        <Layout style={styles.box}>
-            <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
-            <Text style={styles.text}>Här kan det stå lite text om stället som 
-              krogen själva tycker är viktig. 
+        <Layout style={styles.imageBox}>
+          <Layout style={styles.box}>
+          <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
+            <Text style={styles.infoText}>Här kan det stå lite text om stället som 
+            de själva vill att besökare ska få tillgång till. 
             </Text>
 
             <TouchableOpacity onPress={() => {handlePress()}}>
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
-        </Layout>
+          </Layout>
 
+            
         <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
                     source={require('../assets/images/olkompaniet.png')}
                 />
+        </Layout>
 
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Hur många är här?</Text>
@@ -70,6 +73,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme['color-primary-100'],
     marginVertical: 10
   },
+  imageBox: {
+    backgroundColor: theme['color-primary-100'],
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 200
+  },
   starBox: {
     backgroundColor: theme['color-primary-100'],
     marginTop: 40,
@@ -80,8 +90,7 @@ const styles = StyleSheet.create({
   imgLogo: {
     height: 100,
     width: 100,
-    alignSelf: 'flex-end',
-    marginHorizontal: 30
+    alignSelf: 'center',
   },
   statusBar: {
     flexDirection: 'row',
@@ -101,6 +110,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%'
+  },
+  infoText: {
+    fontFamily: 'Montserrat_400Regular',
+    paddingTop: '3%',
+    width: 200
   },
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
