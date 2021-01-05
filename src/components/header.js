@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     top: 20
 },
   imgLogo: {
-    height: 200
+    height: 170
 },
 input: {
   marginHorizontal: 10,
   position: 'relative',
-  top: -20,
+  top: -30,
   borderRadius: 15
 }
 })
