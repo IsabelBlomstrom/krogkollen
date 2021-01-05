@@ -12,10 +12,9 @@ const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode='none' initialRouteName="LandingPage">
-    <Screen name='LandingPage' component={LandingPage}/>
+    <Screen name='LandingPage' component={TabNavigator}/>
     <Screen name="DetailPage" component={DetailPage}/>
     <Screen name="FavoritesPage" component={FavoritesPage}/>
-    <Screen name='HomePage' component={TabNavigator}/>
   </Navigator>
 );
 
