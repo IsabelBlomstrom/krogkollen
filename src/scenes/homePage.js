@@ -36,10 +36,10 @@ button: {
     marginHorizontal: 10,
 },
 rowBox: {
-    marginTop: 50,
     backgroundColor: theme['color-primary-100'],
     flexDirection: 'row',
     justifyContent: 'space-around',
+    paddingBottom: '3%'
   },
   text: {
     fontFamily: 'Montserrat_400Regular',
