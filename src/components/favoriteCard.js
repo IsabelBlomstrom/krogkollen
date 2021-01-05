@@ -19,7 +19,7 @@ export default function FavoriteCard({navigation}) {
                 <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}>
                     <Text category="h5" style={styles.text}>Ölkompaniet</Text>
                     <Text style={styles.text}>Danska vägen 110</Text>
-                    <Text style={styles.text}>50/150</Text>
+                    <Text style={styles.quantity}>50/150</Text>
                 </Layout>
                 <Image
                     style={styles.imgLogo}
@@ -35,7 +35,6 @@ export default function FavoriteCard({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
       justifyContent: "center",
       backgroundColor: theme['color-primary-100'],
       alignContent: "center",
@@ -45,6 +44,12 @@ const styles = StyleSheet.create({
       marginVertical: 10,
       marginHorizontal: 10,
   },
+  quantity: {
+    fontFamily: 'Montserrat_400Regular', 
+    marginVertical: 10,
+    marginHorizontal: 10,
+    color: theme['color-success-400']
+},
   favoriteCard: {
       backgroundColor: theme['color-primary-500'],
       marginHorizontal: 10,

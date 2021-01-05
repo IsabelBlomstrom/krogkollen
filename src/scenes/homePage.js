@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Text, Button } from '@ui-kitten/components';
+import { Layout, Text } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
 import PubCard2 from '../components/pubCard2'
@@ -29,11 +29,6 @@ const styles = StyleSheet.create({
 container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
-},
-button: {
-    marginBottom: 100,
-    backgroundColor: theme['color-info-500'],
-    marginHorizontal: 10,
 },
 rowBox: {
     backgroundColor: theme['color-primary-100'],
