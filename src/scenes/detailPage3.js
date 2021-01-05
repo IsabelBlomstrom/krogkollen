@@ -1,33 +1,36 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native'
-import { Layout, Text, Button, Icon } from '@ui-kitten/components'
-import * as Linking from 'expo-linking'
+import { StyleSheet, Image, Linking } from 'react-native'
+import { Layout, Text, Icon } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
+import Header from '../components/header'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 
 
+export default function DetailPage({navigation}) {
 
-export default function DetailCard({ navigation }) {
-
-  const navigateDetails = () => {
-    navigation.navigate('HomePage');
-  };
   const handlePress = () => {
-    Linking.openURL('https://www.olkompaniet.com/');
+    Linking.openURL('https://lillarestaurangen.se/');
   }
 
 
-  return (
-    <ScrollView>
+  return(
     <Layout style={styles.container}>
+      <Header/>
+        <TouchableOpacity
+        onPress={() => {navigation.pop()}}>
+            <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
+        </TouchableOpacity>
+        <ScrollView>
+
         <Layout style={styles.imageBox}>
-          <Layout style={styles.box}>
-          <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
+          <Layout style={{backgroundColor: theme['color-primary-100']}}>
+          <Text style={styles.heading} category="h6">Lilla Restaurangen</Text>
             <Text style={styles.infoText}>Här kan det stå lite text om stället som 
             de själva vill att besökare ska få tillgång till. 
             </Text>
 
             <TouchableOpacity onPress={() => {handlePress()}}>
-            <Text style={styles.link}>olkompaniet.com</Text>
+            <Text style={styles.link}>lillarestaurangen.se</Text>
             </TouchableOpacity>
           </Layout>
 
@@ -35,7 +38,7 @@ export default function DetailCard({ navigation }) {
         <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
+                    source={require('../assets/images/lillarest.png')}
                 />
         </Layout>
 
@@ -46,10 +49,10 @@ export default function DetailCard({ navigation }) {
               <Layout style={styles.colorDiv}></Layout>
             </Layout>
 
-            <Text style={styles.quantity} category="h6">50/150</Text>
-            <Text style={styles.text}>Just nu är det (50) personer på den här krogen. 
-              Enligt våra uppgifter är det luftigt och just nu har krogen 
-              en (grön) nivå.
+            <Text style={styles.quantity} category="h6">70/100</Text>
+            <Text style={styles.text}>Just nu är det (70) personer på den här krogen. 
+              Enligt våra uppgifter är det halvfulltt och just nu har krogen 
+              en (gul) nivå.
             </Text>
         </Layout>
 
@@ -57,25 +60,26 @@ export default function DetailCard({ navigation }) {
         <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
         <Icon name="star-outline" fill="#FE9C41" style={styles.star}/>
         </Layout>
-  </Layout>
   </ScrollView>
 
+
+    </Layout>
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
-    marginHorizontal: 10,
   },
   box: {
     backgroundColor: theme['color-primary-100'],
-    marginVertical: 10
+    marginVertical: 10,
+    marginHorizontal: 10
   },
   imageBox: {
     backgroundColor: theme['color-primary-100'],
-    marginVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: 200
@@ -85,8 +89,16 @@ const styles = StyleSheet.create({
     marginTop: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginHorizontal: 10
+
   },
+    icon: {
+    height: 30,
+    width: 30,
+    marginHorizontal: 5,
+    marginBottom: 10,
+},
   imgLogo: {
     height: 100,
     width: 100,
@@ -98,9 +110,9 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   colorDiv: {
-    width: 120,
+    width: 200,
     height: 35,
-    backgroundColor: theme['color-success-400'],
+    backgroundColor: theme['color-warning-400'],
     borderRadius: 20
   },
   heading: {
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
-    color: theme['color-success-400']
+    color: theme['color-warning-400']
 },
   link: {
     color: theme['color-info-500'],
@@ -136,3 +148,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
 },
 })
+
+
+

@@ -6,7 +6,7 @@ import { default as theme } from '../../AppTheme.json';
 export default function PubCard({ navigation }) {
 
     const navigateDetails = () => {
-        navigation.navigate('DetailPage');
+        navigation.navigate('DetailPage3');
       };
 
     return(

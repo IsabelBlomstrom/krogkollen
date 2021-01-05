@@ -9,7 +9,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 export default function DetailPage({navigation}) {
 
   const handlePress = () => {
-    Linking.openURL('https://www.olkompaniet.com/');
+    Linking.openURL('https://www.olstugan.se/lejonet');
   }
 
 
@@ -20,17 +20,18 @@ export default function DetailPage({navigation}) {
         onPress={() => {navigation.pop()}}>
             <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
         </TouchableOpacity>
-        <ScrollView>
 
+        <ScrollView>
+    <Layout style={styles.container}>
         <Layout style={styles.imageBox}>
-          <Layout style={{backgroundColor: theme['color-primary-100']}}>
-          <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
+        <Layout style={{backgroundColor: theme['color-primary-100']}}>
+          <Text style={styles.heading} category="h6">Tullen Lejonet</Text>
             <Text style={styles.infoText}>Här kan det stå lite text om stället som 
             de själva vill att besökare ska få tillgång till. 
             </Text>
 
             <TouchableOpacity onPress={() => {handlePress()}}>
-            <Text style={styles.link}>olkompaniet.com</Text>
+            <Text style={styles.link}>olstugan.se</Text>
             </TouchableOpacity>
           </Layout>
 
@@ -38,7 +39,7 @@ export default function DetailPage({navigation}) {
         <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
+                    source={require('../assets/images/tullen.png')}
                 />
         </Layout>
 
@@ -49,10 +50,10 @@ export default function DetailPage({navigation}) {
               <Layout style={styles.colorDiv}></Layout>
             </Layout>
 
-            <Text style={styles.quantity} category="h6">50/150</Text>
-            <Text style={styles.text}>Just nu är det (50) personer på den här krogen. 
-              Enligt våra uppgifter är det luftigt och just nu har krogen 
-              en (grön) nivå.
+            <Text style={styles.quantity} category="h6">110/120</Text>
+            <Text style={styles.text}>Just nu är det (110) personer på den här krogen. 
+              Enligt våra uppgifter är det (trångt) och just nu har krogen 
+              en (röd) nivå.
             </Text>
         </Layout>
 
@@ -60,14 +61,12 @@ export default function DetailPage({navigation}) {
         <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
         <Icon name="star-outline" fill="#FE9C41" style={styles.star}/>
         </Layout>
+    </Layout>
   </ScrollView>
-
 
     </Layout>
   )
 }
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -77,6 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme['color-primary-100'],
     marginVertical: 10,
     marginHorizontal: 10
+
   },
   imageBox: {
     backgroundColor: theme['color-primary-100'],
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginHorizontal: 10
-
   },
     icon: {
     height: 30,
@@ -110,9 +109,9 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   colorDiv: {
-    width: 120,
+    width: 300,
     height: 35,
-    backgroundColor: theme['color-success-400'],
+    backgroundColor: theme['color-danger-400'],
     borderRadius: 20
   },
   heading: {
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
-    color: theme['color-success-400']
+    color: theme['color-danger-400']
 },
   link: {
     color: theme['color-info-500'],
@@ -148,6 +147,3 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
 },
 })
-
-
-
