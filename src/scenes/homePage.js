@@ -12,19 +12,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default function HomePage({ navigation }) {
 
     return(
-        <ScrollView>
             <Layout style={styles.container}>
+
                 <Header/>
             <Layout style={styles.rowBox}>
                 <Text style={styles.textCurrent}>Listvy</Text>
                 <Text style={styles.text}>Kartvy</Text>
             </Layout>
+            <ScrollView>
+
                 <PubCard navigation={navigation}/>
                 <PubCard2 navigation={navigation}/>
                 <PubCard3 navigation={navigation}/>
+                </ScrollView>
 
             </Layout>
-        </ScrollView>
     )
 }
 

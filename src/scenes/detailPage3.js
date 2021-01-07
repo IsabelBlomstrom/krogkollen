@@ -9,7 +9,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 export default function DetailPage({navigation}) {
 
   const handlePress = () => {
-    Linking.openURL('https://www.olkompaniet.com/');
+    Linking.openURL('https://lillarestaurangen.se/');
   }
 
 
@@ -24,13 +24,13 @@ export default function DetailPage({navigation}) {
 
         <Layout style={styles.imageBox}>
           <Layout style={{backgroundColor: theme['color-primary-100']}}>
-          <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
+          <Text style={styles.heading} category="h6">Lilla Restaurangen</Text>
             <Text style={styles.infoText}>Här kan det stå lite text om stället som 
             de själva vill att besökare ska få tillgång till. 
             </Text>
 
             <TouchableOpacity onPress={() => {handlePress()}}>
-            <Text style={styles.link}>olkompaniet.com</Text>
+            <Text style={styles.link}>lillarestaurangen.se</Text>
             </TouchableOpacity>
           </Layout>
 
@@ -38,7 +38,7 @@ export default function DetailPage({navigation}) {
         <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
+                    source={require('../assets/images/lillarest.png')}
                 />
         </Layout>
 
@@ -49,10 +49,10 @@ export default function DetailPage({navigation}) {
               <Layout style={styles.colorDiv}></Layout>
             </Layout>
 
-            <Text style={styles.quantity} category="h6">50/150</Text>
-            <Text style={styles.text}>Just nu är det (50) personer på den här krogen. 
-              Enligt våra uppgifter är det luftigt och just nu har krogen 
-              en (grön) nivå.
+            <Text style={styles.quantity} category="h6">70/100</Text>
+            <Text style={styles.text}>Just nu är det (70) personer på den här krogen. 
+              Enligt våra uppgifter är det halvfulltt och just nu har krogen 
+              en (gul) nivå.
             </Text>
         </Layout>
 
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   colorDiv: {
-    width: 120,
+    width: 200,
     height: 35,
-    backgroundColor: theme['color-success-400'],
+    backgroundColor: theme['color-warning-400'],
     borderRadius: 20
   },
   heading: {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
-    color: theme['color-success-400']
+    color: theme['color-warning-400']
 },
   link: {
     color: theme['color-info-500'],
