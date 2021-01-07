@@ -6,7 +6,7 @@ import Header from '../components/header'
 import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
 
-export default function MapPage() {
+export default function MapPage({ navigation }) {
 
   const navigateDetails = () => {
     navigation.navigate('HomePage');
