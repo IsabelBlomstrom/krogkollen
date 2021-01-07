@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Image, Linking } from 'react-native'
 import { Layout, Text, Icon } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
@@ -8,10 +8,16 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 
 export default function DetailPage({navigation}) {
 
-  const handlePress = () => {
+  const handleLinkPress = () => {
     Linking.openURL('https://www.olkompaniet.com/');
   }
 
+    const [starState, setStarState] = useState(true);
+  
+    const addFavorite = () => {
+      setStarState(!starState);
+    };
+  
 
   return(
     <Layout style={styles.container}>
@@ -29,7 +35,7 @@ export default function DetailPage({navigation}) {
             de själva vill att besökare ska få tillgång till. 
             </Text>
 
-            <TouchableOpacity onPress={() => {handlePress()}}>
+            <TouchableOpacity onPress={() => {handleLinkPress()}}>
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
           </Layout>
@@ -56,11 +62,13 @@ export default function DetailPage({navigation}) {
             </Text>
         </Layout>
 
-        <Layout style={styles.starBox}>
-        <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
-        <Icon name="star-outline" fill="#FE9C41" style={styles.star}/>
-        </Layout>
-  </ScrollView>
+          <Layout style={styles.starBox}>
+            <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
+              <TouchableOpacity onPress={() => {addFavorite()}}>
+                <Icon name={starState ? "star-outline" : "star"} fill="#FE9C41" style={styles.star}/>
+              </TouchableOpacity>
+          </Layout>
+    </ScrollView>
 
 
     </Layout>
