@@ -81,12 +81,13 @@ const styles = StyleSheet.create({
   imageBox: {
     backgroundColor: theme['color-primary-100'],
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
     height: 200
   },
   starBox: {
     backgroundColor: theme['color-primary-100'],
-    marginTop: 40,
+    marginVertical: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
