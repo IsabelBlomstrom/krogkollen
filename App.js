@@ -8,13 +8,20 @@ import {
 } from '@expo-google-fonts/montserrat';
 import {AppNavigator} from './src/navigation/appNavigation';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import firebase from './src/firebase';
 
+// firebase.firestore().collection('pub').add({
+//   name: 'isabel',
+//   adress: 'blabla',
+//   quantity: '30/20'
+// })
 
 export default function App() {
   useFonts({ // lägg i en useEffect
     Montserrat_400Regular,
   });
   useFonts();
+
 
   return (
     <ApplicationProvider {...eva} 
