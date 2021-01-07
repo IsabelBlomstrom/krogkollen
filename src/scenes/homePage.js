@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
@@ -11,19 +11,29 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function HomePage({ navigation }) {
 
+  const navigateDetails = () => {
+    navigation.navigate('MapPage');
+  };
+
     return(
             <Layout style={styles.container}>
 
                 <Header/>
             <Layout style={styles.rowBox}>
                 <Text style={styles.textCurrent}>Listvy</Text>
-                <Text style={styles.text}>Kartvy</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigateDetails();
+                }}
+                >
+                  <Text style={styles.text}>Kartvy</Text>
+                </TouchableOpacity>
             </Layout>
-            <ScrollView>
+                <ScrollView>
 
-                <PubCard navigation={navigation}/>
-                <PubCard2 navigation={navigation}/>
-                <PubCard3 navigation={navigation}/>
+                  <PubCard navigation={navigation}/>
+                  <PubCard2 navigation={navigation}/>
+                  <PubCard3 navigation={navigation}/>
                 </ScrollView>
 
             </Layout>

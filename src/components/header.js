@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Input, Icon } from '@ui-kitten/components';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 
 const SearchIcon = (props) => (
