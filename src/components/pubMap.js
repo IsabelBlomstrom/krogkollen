@@ -16,11 +16,11 @@ export default function PubMap({ navigation }) {
       <Layout style={styles.container}>
           <MapView
           style={styles.map}
-      initialRegion={{
-      latitude: 57.708870,
-      longitude: 11.974560,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
+          initialRegion={{
+          latitude: 57.708870,
+          longitude: 11.974560,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
     }}
   >
 
