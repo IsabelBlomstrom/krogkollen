@@ -4,7 +4,7 @@ import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import firebase from '../firebase';
+import { app } from '../base';
 
 
 export default function PubCard({ navigation }) {
@@ -12,9 +12,18 @@ export default function PubCard({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const db = firebase.firestore()
-            const data = await db.collection('pub').get()
-            setPub(data.docs.map(doc => doc.data()))
+            const db = app.firestore()
+            const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+            const url = ref.child('image.png');
+            db.collection('pub')
+            .onSnapshot((snapShot) => {
+                const newPub = snapShot.docs.map((doc) => ({
+                    id: doc.id,
+                    url,
+                    ...doc.data()
+                }))
+                setPub(newPub)
+            })
         }
         fetchData();
     }, [])
@@ -25,8 +34,9 @@ export default function PubCard({ navigation }) {
 
     return(
         <Layout style={styles.container}>
-            {pubs.map(pub => 
+             {pubs.map(pub => 
             <TouchableOpacity
+            key={pub.id}
             onPress={() => {
                 navigateDetails();
               }}>
@@ -39,10 +49,11 @@ export default function PubCard({ navigation }) {
                 <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
+                    source={{uri: pub.image}}
                 />
             </Layout>
             </TouchableOpacity>
-              )}
+   )}
         </Layout>
     )
 } 

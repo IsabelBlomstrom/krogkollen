@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
-import PubCard2 from '../components/pubCard2'
-import PubCard3 from '../components/pubCard3'
+// import PubCard2 from '../components/pubCard2'
+// import PubCard3 from '../components/pubCard3'
 import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -21,8 +21,6 @@ export default function HomePage({ navigation }) {
             </Layout>
             <ScrollView>
                 <PubCard navigation={navigation}/>
-                {/* <PubCard2 navigation={navigation}/>
-                <PubCard3 navigation={navigation}/> */}
                 </ScrollView>
 
             </Layout>
