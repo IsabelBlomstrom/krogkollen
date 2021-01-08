@@ -20,10 +20,9 @@ export default function HomePage({ navigation }) {
                 <Text style={styles.text}>Kartvy</Text>
             </Layout>
             <ScrollView>
-
                 <PubCard navigation={navigation}/>
-                <PubCard2 navigation={navigation}/>
-                <PubCard3 navigation={navigation}/>
+                {/* <PubCard2 navigation={navigation}/>
+                <PubCard3 navigation={navigation}/> */}
                 </ScrollView>
 
             </Layout>
