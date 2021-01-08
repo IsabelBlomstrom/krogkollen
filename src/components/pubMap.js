@@ -1,11 +1,17 @@
 import React from 'react'
-import { Layout } from '@ui-kitten/components';
-import { StyleSheet, Dimensions, Image } from 'react-native';
+import { Layout, Text } from '@ui-kitten/components';
+import { StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 import MapView, { Callout, Marker } from 'react-native-maps';
 
 
-export default function PubMap() {
+export default function PubMap({ navigation }) {
+
+  const navigateDetails = () => {
+    navigation.navigate('DetailPage');
+  };
+
+
   return(
       <Layout style={styles.container}>
           <MapView
@@ -17,6 +23,8 @@ export default function PubMap() {
       longitudeDelta: 0.0421,
     }}
   >
+
+{/*MARKER AND CALLOUT FOR TULLEN LEJONET */}
       <Marker
       title="Tullen Lejonet"
       coordinate={{
@@ -24,24 +32,85 @@ export default function PubMap() {
         longitude: 11.991
       }}
       >
-         <Image source={require('../assets/images/marker.png')} style={{height: 40, width:25 }} />
+             <Callout 
+        style={{justifyContent: 'center'}}
+        width={150} height={80}
+        onPress={() => {
+        navigateDetails();
+        }}>
+           <TouchableOpacity>
+               <Text
+                category="h6"
+                style={styles.text}
+                >
+                Tulllen Lejonet</Text>
+                <Text
+                style={styles.text}>
+                Friggatan 27</Text>
+                <Text
+                style={styles.text}>
+                110/120</Text>
+           </TouchableOpacity>
+      </Callout>
+       </Marker>
 
-        </Marker>
+{/*MARKER AND CALLOUT FOR ÖLKOMPANIET */}
+    <Marker
+        coordinate={{
+        latitude: 57.71490,
+        longitude: 12.0045
+        }}>
+     <Callout 
+        style={{justifyContent: 'center'}}
+        width={150} height={80}
+        onPress={() => {
+        navigateDetails();
+        }}>
+           <TouchableOpacity>
+               <Text
+                category="h6"
+                style={styles.text}
+                >
+                Ölkompaniet</Text>
+                <Text
+                style={styles.text}>
+                Danska vägen 110</Text>
+                <Text
+                style={styles.text}>
+                50/150</Text>
+           </TouchableOpacity>
+      </Callout>
+    </Marker>
 
-        <Marker
-        title="Ölkompaniet"
-    coordinate={{
-      latitude: 57.71490,
-      longitude: 12.0045
-    }}
-    />
+
+{/*MARKER AND CALLOUT FOR LILLA RESTAURANGEN */}
         <Marker
         title="Lilla restaurangen"
-    coordinate={{
-      latitude: 57.71470,
-      longitude: 11.998
-    }}
-    />
+        coordinate={{
+        latitude: 57.71470,
+        longitude: 11.998
+    }}>
+           <Callout 
+        style={{justifyContent: 'center'}}
+        width={150} height={80}
+        onPress={() => {
+        navigateDetails();
+        }}>
+           <TouchableOpacity>
+               <Text
+                category="h6"
+                style={styles.text}
+                >
+                Lilla Restaurangen</Text>
+                <Text
+                style={styles.text}>
+                Redbergsvägen 8</Text>
+                <Text
+                style={styles.text}>
+                70/100</Text>
+           </TouchableOpacity>
+      </Callout>
+      </Marker>
     </MapView>
       </Layout>
   )
@@ -60,9 +129,8 @@ const styles = StyleSheet.create({
     marginVertical: 40,
     height: Dimensions.get('window').height/2,
   },
-  callout: {
-    width: 100,
-    height: 50,
-
-  }
+text: {
+  fontFamily: 'Montserrat_400Regular', 
+  color: 'black',
+},
 })

@@ -26,7 +26,7 @@ export default function MapPage({ navigation }) {
                 <Text style={styles.textCurrent}>Kartvy</Text>
             </Layout>
         <ScrollView>
-          <PubMap/>
+          <PubMap navigation={navigation}/>
         </ScrollView>
     </Layout>
   )
