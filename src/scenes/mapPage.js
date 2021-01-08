@@ -2,45 +2,42 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
-import PubCard from '../components/pubCard';
 import Header from '../components/header'
+import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
 
-
-export default function HomePage({ navigation }) {
+export default function MapPage({ navigation }) {
 
   const navigateDetails = () => {
-    navigation.navigate('MapPage');
+    navigation.navigate('HomePage');
   };
 
-    return(
-            <Layout style={styles.container}>
-
-                <Header/>
-            <Layout style={styles.rowBox}>
-                <Text style={styles.textCurrent}>Listvy</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigateDetails();
-                }}
-                >
-                  <Text style={styles.text}>Kartvy</Text>
-                </TouchableOpacity>
+  return(
+    <Layout style={styles.container}>
+      <Header/>
+      <Layout style={styles.rowBox}>
+        <TouchableOpacity
+          onPress={() => {
+            navigateDetails();
+        }}
+        >
+              <Text style={styles.text}>Listvy</Text>
+        </TouchableOpacity>
+                <Text style={styles.textCurrent}>Kartvy</Text>
             </Layout>
-            <ScrollView>
-                <PubCard navigation={navigation}/>
-                </ScrollView>
-
-            </Layout>
-    )
+        <ScrollView>
+          <PubMap/>
+        </ScrollView>
+    </Layout>
+  )
 }
 
 const styles = StyleSheet.create({
-container: {
-    flex: 1,
-    backgroundColor: theme['color-primary-100'],
-},
-rowBox: {
+  container: {
+      flex: 1,
+      backgroundColor: theme['color-primary-100'],
+  },
+  rowBox: {
     backgroundColor: theme['color-primary-100'],
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -57,5 +54,3 @@ rowBox: {
     textDecorationLine: 'underline'
   }
 })
-
-
