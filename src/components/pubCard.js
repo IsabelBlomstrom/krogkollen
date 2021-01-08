@@ -1,9 +1,32 @@
 import React from 'react'
-import { Layout, Text} from '@ui-kitten/components';
+import { Layout, List, Text} from '@ui-kitten/components';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { app } from '../base';
+
 
 export default function PubCard({ navigation }) {
+    const [pubs, setPub] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const db = app.firestore()
+            const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+            const url = ref.child('image.png');
+            db.collection('pub')
+            .onSnapshot((snapShot) => {
+                const newPub = snapShot.docs.map((doc) => ({
+                    id: doc.id,
+                    url,
+                    ...doc.data()
+                }))
+                setPub(newPub)
+            })
+        }
+        fetchData();
+    }, [])
 
     const navigateDetails = () => {
         navigation.navigate('DetailPage');
@@ -11,23 +34,26 @@ export default function PubCard({ navigation }) {
 
     return(
         <Layout style={styles.container}>
+             {pubs.map(pub => 
             <TouchableOpacity
+            key={pub.id}
             onPress={() => {
                 navigateDetails();
               }}>
             <Layout style={styles.pubCard}>
-                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}>
-                    <Text category="h5" style={styles.text}>Ölkompaniet</Text>
-                    <Text style={styles.text}>Danska vägen 110</Text>
-                    <Text style={styles.quantity}>50/150</Text>
+                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
+                    <Text category="h5" style={styles.text}>{pub.name}</Text>
+                    <Text style={styles.text}>{pub.adress}</Text>
+                    <Text style={styles.quantity}>{pub.quantity}</Text>
                 </Layout>
                 <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
+                    source={{uri: pub.image}}
                 />
             </Layout>
             </TouchableOpacity>
+   )}
         </Layout>
     )
 } 
