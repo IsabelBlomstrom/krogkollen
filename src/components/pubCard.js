@@ -32,6 +32,7 @@ export default function PubCard({ navigation }) {
         navigation.navigate('DetailPage');
       };
 
+
     return(
         <Layout style={styles.container}>
              {pubs.map(pub => 
@@ -44,7 +45,14 @@ export default function PubCard({ navigation }) {
                 <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
                     <Text category="h5" style={styles.text}>{pub.name}</Text>
                     <Text style={styles.text}>{pub.adress}</Text>
-                    <Text style={styles.quantity}>{pub.quantity}</Text>
+                    {pub.quantity <= pub.maxQuantity/3 ? (
+                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+
+                    ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
+                    <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        ) : (
+                    <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        )}
                 </Layout>
                 <Image
                     style={styles.imgLogo}
@@ -75,7 +83,6 @@ quantity: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
-    color: theme['color-success-400']
 },
 pubCard: {
     backgroundColor: theme['color-primary-500'],
