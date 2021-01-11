@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import '@firebase/firestore';
 import 'firebase/storage'
 
-  export const app =  firebase.initializeApp({
+  const config =  ({
     apiKey: "AIzaSyAlxmTlKpk7vm-iNYAEJyIDf0IAYCQ1OSE",
     authDomain: "krogkollen-f1cd6.firebaseapp.com",
     projectId: "krogkollen-f1cd6",
@@ -11,4 +11,7 @@ import 'firebase/storage'
     appId: "1:13531846650:web:081a327e7f75e237447643",
     measurementId: "G-17G5MCP8DZ"
   });
+
+  export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+
 

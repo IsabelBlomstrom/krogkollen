@@ -15,7 +15,6 @@ export default function HomePage({ navigation }) {
 
     return(
             <Layout style={styles.container}>
-
                 <Header/>
             <Layout style={styles.rowBox}>
                 <Text style={styles.textCurrent}>Listvy</Text>
