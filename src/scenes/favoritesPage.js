@@ -13,7 +13,7 @@ export default function FavoritesPage({navigation}) {
       <ScrollView>
         <Header/>
           <Layout style={styles.rowBox}>
-            <Text style={styles.text}>Favoriter</Text>
+            <Text category="h6" style={styles.text}>Favoriter</Text>
           </Layout>
       <FavoriteCard navigation={navigation}/>
     </ScrollView>
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
     color: theme['color-info-500'],
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
   },
 })
