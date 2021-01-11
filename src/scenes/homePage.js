@@ -16,59 +16,56 @@ export default function HomePage({ navigation }) {
     setToggle(!toggle);
   };
 
-  // const navigateDetails = () => {
-  //   navigation.navigate('MapPage');
-  // };
-
     return(
-            <Layout style={styles.container}>
+      <Layout style={styles.container}>
+            <Header/>
 
-                <Header/>
-            <Layout style={styles.rowBox}>
-                <TouchableOpacity
-                  onPress={() => {
-                    switchComponent();
-                }}
-                >
-                  {toggle ? (
+                {toggle ? (
+                  <Layout>
+                    <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
-                    category="h6">Listvy</Text>
-                  ) : (
-                    <Text 
-                    style={styles.text}
-                    category="h6">Listvy</Text>
-                  )}
-                </TouchableOpacity>               
-                
-                 <TouchableOpacity
+                    category="h6">Listvy</Text>                
+                  <TouchableOpacity
                   onPress={() => {
                     switchComponent();
                 }}
                 >
-                {toggle ? (
                     <Text 
                     style={styles.text}
                     category="h6">Kartvy</Text>
-                  ) : (
-                    <Text 
-                    category="h6"
-                    style={styles.textCurrent}
-                    >Kartvy</Text>
-                  )}
                 </TouchableOpacity>
             </Layout>
             <ScrollView>
-              {toggle ? (
               <PubCard navigation={navigation}/>
-              ) : (
-              <PubMap navigation={navigation}/>
-                )}
-                </ScrollView>
+              </ScrollView>
+                    </Layout>
 
-            </Layout>
-    )
-}
+                ) : (
+                  <Layout>
+                  <Layout style={styles.rowBox}>
+                  <TouchableOpacity
+                onPress={() => {
+                  switchComponent();
+              }}
+              >
+                  <Text 
+                  style={styles.text}
+                  category="h6">Listvy</Text>                
+                  </TouchableOpacity>
+
+                  <Text 
+                  style={styles.textCurrent}
+                  category="h6">Kartvy</Text>
+          </Layout>
+          <ScrollView>
+            <PubMap navigation={navigation}/>
+            </ScrollView>
+                  </Layout>
+                )}
+                </Layout>
+
+    )}
 
 const styles = StyleSheet.create({
 container: {
