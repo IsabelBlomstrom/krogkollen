@@ -47,7 +47,6 @@ export default function PubCard({ navigation }) {
                     <Text style={styles.text}>{pub.adress}</Text>
                     {pub.quantity <= pub.maxQuantity/3 ? (
                         <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-
                     ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
                     <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
                         ) : (
