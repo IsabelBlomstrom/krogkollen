@@ -1,20 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Image, Linking } from 'react-native'
-import { Layout, Text, Icon } from '@ui-kitten/components'
+import { Layout, Text, Icon, Divider } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 import Header from '../components/header'
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
+import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler'
+import firebase from 'firebase'
+import { NavigationEvents } from 'react-navigation'
 
 
-export default function DetailPage({navigation}) {
+export default function DetailPage({route, navigation}) {
+  const { item } = route.params;
+  const [starState, setStarState] = useState(true);
 
   const handleLinkPress = () => {
     Linking.openURL('https://www.olkompaniet.com/');
   }
 
-    const [starState, setStarState] = useState(true);
-  
-    const addFavorite = () => {
+
+  const addFavorite = () => {
       setStarState(!starState);
     };
   
@@ -22,32 +25,27 @@ export default function DetailPage({navigation}) {
   return(
     <Layout style={styles.container}>
       <Header/>
-        <TouchableOpacity
+      <TouchableOpacity
         onPress={() => {navigation.pop()}}>
             <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
         </TouchableOpacity>
         <ScrollView>
-
-        <Layout style={styles.imageBox}>
+            <Layout style={styles.imageBox}>
           <Layout style={{backgroundColor: theme['color-primary-100']}}>
-          <Text style={styles.heading} category="h6">Ostindiska Ölkompaniet</Text>
-            <Text style={styles.infoText}>Här kan det stå lite text om stället som 
-            de själva vill att besökare ska få tillgång till. 
-            </Text>
-
+            <Text style={styles.heading} category="h4">{item.name}</Text>
+            <Divider/>
+            <Text style={{paddingTop: 10}}>{item.info}</Text>
             <TouchableOpacity onPress={() => {handleLinkPress()}}>
+            <Text>Besök vår hemsida för meny och mer:</Text>
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
           </Layout>
-
-            
-        <Image
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
-                />
+        {/* <Image
+              style={styles.imgLogo}
+              resizeMode="contain"
+              source={{uri: item.image}}
+        /> */}
         </Layout>
-
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Hur många är här?</Text>
 
@@ -55,22 +53,20 @@ export default function DetailPage({navigation}) {
               <Layout style={styles.colorDiv}></Layout>
             </Layout>
 
-            <Text style={styles.quantity} category="h6">50/150</Text>
-            <Text style={styles.text}>Just nu är det (50) personer på den här krogen. 
+            <Text style={styles.quantity} category="h6"></Text>
+            <Text style={styles.text}>Just nu är det {item.quantity} personer på den här krogen. 
               Enligt våra uppgifter är det luftigt och just nu har krogen 
               en (grön) nivå.
             </Text>
         </Layout>
-
           <Layout style={styles.starBox}>
             <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
               <TouchableOpacity onPress={() => {addFavorite()}}>
                 <Icon name={starState ? "star-outline" : "star"} fill="#FE9C41" style={styles.star}/>
               </TouchableOpacity>
+             
           </Layout>
     </ScrollView>
-
-
     </Layout>
   )
 }

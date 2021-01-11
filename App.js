@@ -8,7 +8,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 import {AppNavigator} from './src/navigation/appNavigation';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import firebase from './src/base';
+import app from './src/base';
 
 // firebase.firestore().collection('pub').add({
 //   name: 'isabel',

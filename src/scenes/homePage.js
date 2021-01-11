@@ -21,7 +21,7 @@ export default function HomePage({ navigation }) {
             <Header/>
 
                 {toggle ? (
-                  <ScrollView>
+              <ScrollView>
                     <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
@@ -37,7 +37,8 @@ export default function HomePage({ navigation }) {
                 </TouchableOpacity>
             </Layout>
               <PubCard navigation={navigation}/>
-              </ScrollView>
+                    </ScrollView>
+
                 ) : (
                   <ScrollView>
                   <Layout style={styles.rowBox}>
