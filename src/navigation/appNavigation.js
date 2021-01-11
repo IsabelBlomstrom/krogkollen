@@ -7,7 +7,6 @@ import { StyleSheet } from 'react-native';
 import { TabNavigator } from '../navigation/bottomNavigator';
 import DetailPage2 from '../scenes/detailPage2'
 import DetailPage3 from '../scenes/detailPage3'
-import MapPage from '../scenes/mapPage'
 
 
 const { Navigator, Screen } = createStackNavigator();
@@ -19,7 +18,6 @@ const HomeNavigator = () => (
     <Screen name="DetailPage2" component={DetailPage2}/>
     <Screen name="DetailPage3" component={DetailPage3}/>
     <Screen name="FavoritesPage" component={FavoritesPage}/>
-    <Screen name="MapPage" component={MapPage}/>
   </Navigator>
 );
 
