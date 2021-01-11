@@ -44,16 +44,16 @@ export default function PubCard({ navigation }) {
             <Layout style={styles.pubCard}>
                 <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
                     <Text category="h5" style={styles.text}>{pub.name}</Text>
-                    <Text style={styles.text}>{pub.adress}</Text>
+                      <Text style={styles.text}>{pub.adress}</Text>
                     {pub.quantity <= pub.maxQuantity/3 ? (
                         <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
                     ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
-                    <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
                         ) : (
-                    <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
                         )}
                 </Layout>
-                <Image
+            <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
                     source={{uri: pub.image}}

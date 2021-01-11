@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
   },
   map: {
     justifyContent: 'center',
-    alignItems: 'center',
     marginHorizontal: 10,
     marginVertical: 10,
     height: Dimensions.get('window').height/2,
