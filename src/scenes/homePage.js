@@ -40,7 +40,7 @@ export default function HomePage({ navigation }) {
                     </ScrollView>
 
                 ) : (
-                  <Layout>
+                  <ScrollView>
                   <Layout style={styles.rowBox}>
                   <TouchableOpacity
                 onPress={() => {
@@ -56,10 +56,8 @@ export default function HomePage({ navigation }) {
                   style={styles.textCurrent}
                   category="h6">Kartvy</Text>
           </Layout>
-          <ScrollView>
             <PubMap navigation={navigation}/>
             </ScrollView>
-                  </Layout>
                 )}
                 </Layout>
 
