@@ -21,7 +21,7 @@ export default function HomePage({ navigation }) {
             <Header/>
 
                 {toggle ? (
-                  <Layout>
+              <ScrollView>
                     <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
@@ -36,10 +36,8 @@ export default function HomePage({ navigation }) {
                     category="h6">Kartvy</Text>
                 </TouchableOpacity>
             </Layout>
-            <ScrollView>
               <PubCard navigation={navigation}/>
-              </ScrollView>
-                    </Layout>
+                    </ScrollView>
 
                 ) : (
                   <Layout>

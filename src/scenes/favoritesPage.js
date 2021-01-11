@@ -6,7 +6,6 @@ import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 export default function FavoritesPage({navigation}) {
 
   return(
