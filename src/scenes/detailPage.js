@@ -46,24 +46,60 @@ export default function DetailPage({route, navigation}) {
             <Divider/>
             <Text style={{paddingTop: 10}}>{item.info}</Text>
             <TouchableOpacity onPress={() => {handleLinkPress()}}>
-            <Text>Besök vår hemsida för meny och mer:</Text>
+            <Text>Besök hemsidan för meny och mer:</Text>
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
           </Layout>
         </Layout>
+
+
+        {item.quantity <= item.maxQuantity/3 ? (
+
         <Layout style={styles.box}>
             <Text style={styles.heading} category="h6">Hur många är här?</Text>
 
             <Layout style={styles.statusBar}>
-              <Layout style={styles.colorDiv}></Layout>
+              <Layout style={[styles.colorDiv, {backgroundColor: theme['color-success-400'], width: 120}]}></Layout>
             </Layout>
 
-            <Text style={styles.quantity} category="h6"></Text>
+            <Text style={[styles.quantity, {color: theme['color-success-400']}]} category="h6">{item.quantity}/{item.maxQuantity}</Text>
             <Text style={styles.text}>Just nu är det {item.quantity} personer på den här krogen. 
               Enligt våra uppgifter är det luftigt och just nu har krogen 
-              en (grön) nivå.
-            </Text>
+              en grön nivå.
+            </Text>     
         </Layout>
+        ) : item.quantity >= item.maxQuantity/3*2 ? ( 
+          <Layout style={styles.box}>
+          <Text style={styles.heading} category="h6">Hur många är här?</Text>
+
+          <Layout style={styles.statusBar}>
+            <Layout style={[styles.colorDiv, {backgroundColor: theme['color-danger-400'], width: 270}]}></Layout>
+          </Layout>
+
+          <Text style={[styles.quantity, {color: theme['color-danger-400']}]} category="h6">{item.quantity}/{item.maxQuantity}</Text>
+          <Text style={styles.text}>Just nu är det {item.quantity} personer på den här krogen. 
+            Enligt våra uppgifter är det trångt och just nu har krogen 
+            en röd nivå.
+          </Text>     
+      </Layout>
+         ) : (
+          <Layout style={styles.box}>
+          <Text style={styles.heading} category="h6">Hur många är här?</Text>
+
+          <Layout style={styles.statusBar}>
+            <Layout style={[styles.colorDiv, {backgroundColor: theme['color-warning-400'], width: 190}]}></Layout>
+          </Layout>
+
+          <Text style={[styles.quantity, {color: theme['color-warning-400']}]} category="h6">{item.quantity}/{item.maxQuantity}</Text>
+          <Text style={styles.text}>Just nu är det {item.quantity} personer på den här krogen. 
+            Enligt våra uppgifter är det halvfullt och just nu har krogen 
+            en gul nivå.
+          </Text>     
+      </Layout>
+         )}
+
+
+
           <Layout style={styles.starBox}>
             <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
               <TouchableOpacity 
@@ -123,9 +159,7 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   colorDiv: {
-    width: 120,
     height: 35,
-    backgroundColor: theme['color-success-400'],
     borderRadius: 20
   },
   heading: {
@@ -144,7 +178,6 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
-    color: theme['color-success-400']
 },
   link: {
     color: theme['color-info-500'],
