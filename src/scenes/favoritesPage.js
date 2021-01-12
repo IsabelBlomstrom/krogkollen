@@ -1,21 +1,61 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Layout, Text } from '@ui-kitten/components';
 import FavoriteCard from '../components/favoriteCard'
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
+import firebase from 'firebase'
+import PubCard from '../components/pubCard';
 
 export default function FavoritesPage({navigation}) {
+  const [pubs, setPub] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = firebase.firestore()
+      const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+      const url = ref.child('image.png');
+      db.collection("pub").where("favorite", "==", true)
+    .onSnapshot((snapShot) => {
+      const newPub = snapShot.docs.map((doc) => ({
+          id: doc.id,
+          url,
+          ...doc.data()
+      }))
+      setPub(newPub)
+  })
+}
+fetchData();
+  }, [])
 
   return(
     <Layout style={styles.container}>
-      <ScrollView>
         <Header/>
-          <Layout style={styles.rowBox}>
+        <ScrollView>
+        <Layout style={styles.rowBox}>
             <Text category="h6" style={styles.text}>Favoriter</Text>
           </Layout>
-      <FavoriteCard navigation={navigation}/>
+        {pubs.map(pub => 
+            <TouchableOpacity
+            key={pub.id}
+            onPress={() => {
+                navigateDetails(pub);
+              }}>
+            <Layout style={styles.pubCard}>
+                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
+                    <Text category="h5" style={styles.pubText}>{pub.name}</Text>
+                    <Text style={styles.pubText}>{pub.adress}</Text>
+                    <Text style={styles.quantity}>{pub.quantity}/{pub.maxQuantity}</Text>
+                </Layout>
+                <Image
+                    style={styles.imgLogo}
+                    resizeMode="contain"
+                    source={{uri: pub.image}}
+                />
+            </Layout>
+            </TouchableOpacity>
+   )}
     </ScrollView>
   </Layout>
   )
@@ -38,4 +78,28 @@ const styles = StyleSheet.create({
     color: theme['color-info-500'],
     textDecorationLine: 'underline',
   },
+  pubText: {
+    fontFamily: 'Montserrat_400Regular', 
+    marginVertical: 10,
+    marginHorizontal: 10,
+},
+quantity: {
+    fontFamily: 'Montserrat_400Regular', 
+    marginVertical: 10,
+    marginHorizontal: 10,
+    color: theme['color-success-400']
+},
+pubCard: {
+    backgroundColor: theme['color-primary-500'],
+    marginHorizontal: 10,
+    marginVertical: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderRadius: 5,
+    padding: 10,
+},
+imgLogo: {
+    height: 100,
+    width: 100,
+},
 })
