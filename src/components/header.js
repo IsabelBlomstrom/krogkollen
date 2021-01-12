@@ -3,6 +3,8 @@ import { Layout, Input, Icon, Text } from '@ui-kitten/components';
 import { StyleSheet, Image } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 import firebase from 'firebase'
+import PubCard from '../components/pubCard';
+
 
 const SearchIcon = (props) => (
   <Icon {...props} name='search-outline'/>
@@ -11,6 +13,7 @@ const SearchIcon = (props) => (
 export default function Header() {
 
   const [pubs, setPub] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
       const fetchData = async () => {
@@ -41,11 +44,19 @@ export default function Header() {
         style={styles.input}
         placeholder="Sök ..."
         accessoryRight={SearchIcon}
+        onChangeText={(pub) => {
+          setSearchTerm(pub)
+        }}
         />
-    {
-      pubs.map( pub => {
+      {pubs.filter((pub) => {
+        if(searchTerm == "") {
+          return pubs
+        }else if (pub.name.includes(searchTerm)) {
+          return pub.name
+        }
+      }).map((pub, key) => {
         return(
-          <Text>{pub.name}</Text>
+          <Text key={key} style={styles.text}>{pub.name}</Text>
         )
       })
     }
@@ -72,5 +83,10 @@ input: {
   position: 'relative',
   top: -30,
   borderRadius: 15
+},
+text: {
+  color: "white",
+  alignSelf: "center",
+  marginVertical: 10
 }
 })
