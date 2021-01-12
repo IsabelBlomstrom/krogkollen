@@ -1,9 +1,7 @@
-import React from 'react'
-import { Layout, List, Text} from '@ui-kitten/components';
+import React, { useEffect, useState } from 'react'
+import { Layout, Text} from '@ui-kitten/components';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import firebase from 'firebase';
 
 export default function PubCard({ navigation }) {
