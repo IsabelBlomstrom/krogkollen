@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout, Text} from '@ui-kitten/components';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
+import PubCard from '../components/pubCard';
 
 export default function FavoriteCard({navigation}) {
 
@@ -16,17 +17,7 @@ export default function FavoriteCard({navigation}) {
                 navigateDetails();
               }}>
             <Layout style={styles.favoriteCard}>
-                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}>
-                    <Text category="h5" style={styles.text}>Ölkompaniet</Text>
-                    <Text style={styles.text}>Danska vägen 110</Text>
-                    <Text style={styles.quantity}>50/150</Text>
-                </Layout>
-                <Image
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={require('../assets/images/olkompaniet.png')}
-                />
-                <Text>X</Text>
+          <PubCard/>
             </Layout>
             </TouchableOpacity>
     </Layout>
