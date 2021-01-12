@@ -1,27 +1,37 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Image, Linking } from 'react-native'
+import { StyleSheet, Linking } from 'react-native'
 import { Layout, Text, Icon, Divider } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 import Header from '../components/header'
-import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler'
-import firebase from 'firebase'
-import { NavigationEvents } from 'react-navigation'
-
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
+import firebase from 'firebase';
 
 export default function DetailPage({route, navigation}) {
   const { item } = route.params;
   const [starState, setStarState] = useState(true);
 
+  console.log(item.id, 'itemid');
+
+  const onUpdate = () => {
+    if(starState) {
+      firebase.firestore().collection("pub").doc(item.id).update({
+        favorite: true
+      });
+    } else {
+      firebase.firestore().collection("pub").doc(item.id).update({
+        favorite: false
+      });
+    }
+}
   const handleLinkPress = () => {
     Linking.openURL('https://www.olkompaniet.com/');
   }
 
-
   const addFavorite = () => {
       setStarState(!starState);
+      onUpdate();
     };
   
-
   return(
     <Layout style={styles.container}>
       <Header/>
@@ -40,11 +50,6 @@ export default function DetailPage({route, navigation}) {
             <Text style={styles.link}>olkompaniet.com</Text>
             </TouchableOpacity>
           </Layout>
-        {/* <Image
-              style={styles.imgLogo}
-              resizeMode="contain"
-              source={{uri: item.image}}
-        /> */}
         </Layout>
 
 
@@ -97,7 +102,10 @@ export default function DetailPage({route, navigation}) {
 
           <Layout style={styles.starBox}>
             <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
-              <TouchableOpacity onPress={() => {addFavorite()}}>
+              <TouchableOpacity 
+              onPress={() => {
+                addFavorite()
+              }}>
                 <Icon name={starState ? "star-outline" : "star"} fill="#FE9C41" style={styles.star}/>
               </TouchableOpacity>
              
