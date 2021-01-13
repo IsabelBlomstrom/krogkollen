@@ -8,29 +8,29 @@ import firebase from 'firebase';
 
 export default function DetailPage({route, navigation}) {
   const { item } = route.params;
-  const [starState, setStarState] = useState(true);
+  const [starState, setStarState] = useState(item.favorite);
 
-  console.log(item.id, 'itemid');
-
-  const onUpdate = () => {
-    if(starState) {
-      firebase.firestore().collection("pub").doc(item.id).update({
-        favorite: true
-      });
-    } else {
-      firebase.firestore().collection("pub").doc(item.id).update({
-        favorite: false
-      });
-    }
-}
-  const handleLinkPress = () => {
-    Linking.openURL('https://www.olkompaniet.com/');
+    const onUpdate = async () => {
+      if(!starState) {
+        await firebase.firestore().collection("pub").doc(item.id).update({
+          favorite: true,
+        });
+      } else {
+        await firebase.firestore().collection("pub").doc(item.id).update({
+          favorite: false,
+        })
+      }
+      
   }
 
   const addFavorite = () => {
-      setStarState(!starState);
-      onUpdate();
-    };
+    setStarState(!starState)
+    onUpdate();
+  }
+  
+  const handleLinkPress = () => {
+    Linking.openURL('https://www.olkompaniet.com/');
+  }
   
   return(
     <Layout style={styles.container}>
@@ -51,7 +51,6 @@ export default function DetailPage({route, navigation}) {
             </TouchableOpacity>
           </Layout>
         </Layout>
-
 
         {item.quantity <= item.maxQuantity/3 ? (
 
@@ -98,23 +97,18 @@ export default function DetailPage({route, navigation}) {
       </Layout>
          )}
 
-
-
           <Layout style={styles.starBox}>
             <Text style={styles.heading} category="h6">Stjärnmärk som favorit</Text>
-              <TouchableOpacity 
-              onPress={() => {
-                addFavorite()
-              }}>
-                <Icon name={starState ? "star-outline" : "star"} fill="#FE9C41" style={styles.star}/>
+             <TouchableOpacity 
+                onPress={() => {
+                      addFavorite()}}>
+                  <Icon name={starState ? "star" : "star-outline" } fill="#FE9C41" style={styles.star}/>
               </TouchableOpacity>
-             
           </Layout>
     </ScrollView>
     </Layout>
   )
 }
-
 
 const styles = StyleSheet.create({
   container: {
