@@ -31,7 +31,7 @@ export const LandingPage = ({ navigation }) => {
         <Image
           style={styles.imgLogo}
           resizeMode="contain"
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/Krogkollen.png')}
         />
         <Text style={styles.text}>Välj stad</Text>
             <Select
