@@ -90,6 +90,8 @@ container: {
 imgLogo: {
     alignSelf: "center",
     marginTop: 50, 
+    width: 250,
+
 },
 select: {
     width: 300,
