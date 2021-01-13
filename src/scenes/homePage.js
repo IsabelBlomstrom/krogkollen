@@ -58,11 +58,10 @@ export default function HomePage({ navigation }) {
         }else if (pub.name.includes(searchTerm)) {
           return pub
         }
-      }).map((pub, key) => {
-        console.log(pub);
+      }).map((pub) => {
         return(
           <ScrollView>
-             <PubCard navigation={navigation} />
+             <PubCard navigation={navigation} key={pub.id} />
           </ScrollView>
         )
       })
