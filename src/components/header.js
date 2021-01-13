@@ -11,7 +11,7 @@ export default function Header() {
       <Image
       style={styles.imgLogo}
       resizeMode="contain"
-      source={require('../assets/images/logo.png')}
+      source={require('../assets/images/krogkollen.png')}
     />
    </Layout>
 
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     top: 20
 },
   imgLogo: {
-    height: 170
+    width: 250,
 },
 })
