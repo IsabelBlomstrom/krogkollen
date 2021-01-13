@@ -29,7 +29,7 @@ export default function DetailPage({route, navigation}) {
   }
   
   const handleLinkPress = () => {
-    Linking.openURL('https://www.olkompaniet.com/');
+    Linking.openURL(`${item.url}`);
   }
   
   return(
@@ -47,7 +47,7 @@ export default function DetailPage({route, navigation}) {
             <Text style={{paddingTop: 10}}>{item.info}</Text>
             <TouchableOpacity onPress={() => {handleLinkPress()}}>
             <Text>Besök hemsidan för meny och mer:</Text>
-            <Text style={styles.link}>olkompaniet.com</Text>
+            <Text style={styles.link}>{item.urlShort}</Text>
             </TouchableOpacity>
           </Layout>
         </Layout>
