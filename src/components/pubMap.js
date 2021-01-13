@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout, Text } from '@ui-kitten/components';
-import { StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
 import MapView, { Callout, Marker } from 'react-native-maps';
+import firebase from 'firebase';
 
 
 export default function PubMap({ navigation }) {
 
-  const navigateDetails = () => {
-    navigation.navigate('DetailPage');
-  };
+  const [pubs, setPub] = useState([])
 
+  useEffect(() => {
+      const fetchData = async () => {
+          const db = firebase.firestore()
+          const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+          const url = ref.child('image.png');
+          db.collection('pub')
+          .onSnapshot((snapShot) => {
+              const newPub = snapShot.docs.map((doc) => ({
+                  id: doc.id,
+                  url,
+                  ...doc.data()
+              }))
+              setPub(newPub)
+          })
+      }
+      fetchData();
+  }, [])
 
+  const navigateDetails = (pub) => {
+      navigation.navigate('DetailPage', {item: pub},
+      );
+    };
   return(
       <Layout style={styles.container}>
           <MapView
@@ -24,95 +44,40 @@ export default function PubMap({ navigation }) {
     }}
   >
 
-{/*MARKER AND CALLOUT FOR TULLEN LEJONET */}
-      <Marker
-      title="Tullen Lejonet"
+{/*MARKER AND CALLOUT FOR ALL PUBS */}
+{pubs.map(pub => 
+
+     <Marker
       coordinate={{
-        latitude: 57.71250,
-        longitude: 11.991
+        latitude: pub.coordinate.latitude,
+        longitude: pub.coordinate.longitude
       }}
       >
              <Callout 
-        style={{justifyContent: 'center'}}
-        width={150} height={80}
-        onPress={() => {
-        navigateDetails();
-        }}>
+              key={pub.id}
+              style={{justifyContent: 'center'}}
+              width={150} height={80}
+              onPress={() => {
+              navigateDetails(pub);
+              }}>
            <TouchableOpacity>
                <Text
                 category="h6"
                 style={styles.text}
                 >
-                Tulllen Lejonet</Text>
+                {pub.name}</Text>
                 <Text
                 style={styles.text}>
-                Friggatan 27</Text>
+                {pub.adress}</Text>
                 <Text
                 style={styles.text}>
-                110/120</Text>
+                {pub.quantity}/{pub.maxQuantity}</Text>
            </TouchableOpacity>
-      </Callout>
-       </Marker>
-
-{/*MARKER AND CALLOUT FOR ÖLKOMPANIET */}
-    <Marker
-        coordinate={{
-        latitude: 57.71490,
-        longitude: 12.0045
-        }}>
-     <Callout 
-        style={{justifyContent: 'center'}}
-        width={150} height={80}
-        onPress={() => {
-        navigateDetails();
-        }}>
-           <TouchableOpacity>
-               <Text
-                category="h6"
-                style={styles.text}
-                >
-                Ölkompaniet</Text>
-                <Text
-                style={styles.text}>
-                Danska vägen 110</Text>
-                <Text
-                style={styles.text}>
-                50/150</Text>
-           </TouchableOpacity>
-      </Callout>
-    </Marker>
-
-
-{/*MARKER AND CALLOUT FOR LILLA RESTAURANGEN */}
-        <Marker
-        title="Lilla restaurangen"
-        coordinate={{
-        latitude: 57.71470,
-        longitude: 11.998
-    }}>
-           <Callout 
-        style={{justifyContent: 'center'}}
-        width={150} height={80}
-        onPress={() => {
-        navigateDetails();
-        }}>
-           <TouchableOpacity>
-               <Text
-                category="h6"
-                style={styles.text}
-                >
-                Lilla Restaurangen</Text>
-                <Text
-                style={styles.text}>
-                Redbergsvägen 8</Text>
-                <Text
-                style={styles.text}>
-                70/100</Text>
-           </TouchableOpacity>
-      </Callout>
-      </Marker>
-    </MapView>
-      </Layout>
+          </Callout>
+        </Marker>
+       )}
+     </MapView>
+   </Layout>
   )
 }
 

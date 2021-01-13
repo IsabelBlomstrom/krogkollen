@@ -20,7 +20,7 @@ export default function HomePage({ navigation }) {
       <Layout style={styles.container}>
             <Header/>
 
-                {toggle ? (
+                {/* {toggle ? (
               <ScrollView>
                     <Layout style={styles.rowBox}>
                     <Text 
@@ -58,7 +58,7 @@ export default function HomePage({ navigation }) {
           </Layout>
             <PubMap navigation={navigation}/>
             </ScrollView>
-                )}
+                )} */}
                 </Layout>
 
     )}
