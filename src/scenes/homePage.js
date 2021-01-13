@@ -1,16 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout, Text, Input, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
 import Header from '../components/header'
 import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
+import firebase from 'firebase'
 
+const SearchIcon = (props) => (
+  <Icon {...props} name='search-outline'/>
+);
 
 export default function HomePage({ navigation }) {
 
+  const [pubs, setPub] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
   const [toggle, setToggle] = useState(true);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          const db = firebase.firestore()
+          const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+          const url = ref.child('image.png');
+          db.collection('pub')
+          .onSnapshot((snapShot) => {
+              const newPub = snapShot.docs.map((doc) => ({
+                  id: doc.id,
+                  url,
+                  ...doc.data()
+              }))
+              setPub(newPub)
+          })
+      }
+      fetchData();
+  }, [])
+
   
   const switchComponent = () => {
     setToggle(!toggle);
@@ -19,6 +44,29 @@ export default function HomePage({ navigation }) {
     return(
       <Layout style={styles.container}>
             <Header/>
+            <Input  
+        style={styles.input}
+        placeholder="Sök ..."
+        accessoryRight={SearchIcon}
+        onChangeText={(pub) => {
+          setSearchTerm(pub)
+        }}
+        />
+      {pubs.filter((pub) => {
+        if(searchTerm == "") {
+          return pub
+        }else if (pub.name.includes(searchTerm)) {
+          return pub
+        }
+      }).map((pub, key) => {
+        console.log(pub);
+        return(
+          <ScrollView>
+             <PubCard navigation={navigation} />
+          </ScrollView>
+        )
+      })
+    }
 
                 {/* {toggle ? (
               <ScrollView>
@@ -83,7 +131,13 @@ rowBox: {
     paddingTop: '3%',
     color: theme['color-info-500'],
     textDecorationLine: 'underline'
-  }
+  },
+  input: {
+    marginHorizontal: 10,
+    position: 'relative',
+    top: -30,
+    borderRadius: 15
+  },
 })
 
 
