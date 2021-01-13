@@ -11,7 +11,7 @@ export default function Header() {
       <Image
       style={styles.imgLogo}
       resizeMode="contain"
-      source={require('../assets/images/Krogkollen.png')}
+      source={require('../assets/images/logo.png')}
     />
    </Layout>
 
