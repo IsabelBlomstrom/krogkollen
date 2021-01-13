@@ -11,6 +11,10 @@ import PubCard from '../components/pubCard';
 export default function FavoritesPage({navigation}) {
   const [pubs, setPub] = useState([])
 
+  const navigateDetails = (pub) => {
+    navigation.navigate('DetailPage', {item: pub},
+    );
+  };
   useEffect(() => {
     const fetchData = async () => {
       const db = firebase.firestore()
