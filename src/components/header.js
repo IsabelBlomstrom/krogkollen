@@ -20,7 +20,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
+    height: 170,
     backgroundColor: theme['color-primary-100'],
     flexDirection: "column",
     justifyContent: 'space-evenly',
