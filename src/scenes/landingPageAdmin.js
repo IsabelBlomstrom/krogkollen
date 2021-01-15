@@ -12,6 +12,10 @@ export default function LoginAdmin({navigation}) {
     navigation.navigate('LandingPage');
   };
 
+  const navigateDetails = () => {
+    navigation.navigate('HomePageAdmin');
+  };
+
   return(
     <Layout style={styles.container}>
               <TouchableOpacity
