@@ -3,6 +3,7 @@ import React, { useState} from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Text, Select, SelectItem, Button} from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
+import LoginAdmin from '../components/loginAdmin'
 
 const cities =  [
     "Göteborg",
@@ -33,6 +34,8 @@ export const LandingPage = ({ navigation }) => {
           resizeMode="contain"
           source={require('../assets/images/krogkollen.png')}
         />
+
+        
         <Text style={styles.text}>Välj stad</Text>
             <Select
                     placeholder={cities[0]}
@@ -73,6 +76,7 @@ export const LandingPage = ({ navigation }) => {
                     style={styles.buttonText}>Gå vidare</Text>
               </Button>
              )}
+             <LoginAdmin />
 
       </Layout>
    )     
@@ -91,7 +95,6 @@ imgLogo: {
     alignSelf: "center",
     marginTop: 50, 
     width: 250,
-
 },
 select: {
     width: 300,
