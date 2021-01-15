@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Layout, Text, Input, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
@@ -41,6 +41,11 @@ export default function HomePage({ navigation }) {
     setToggle(!toggle);
   };
 
+  const navigateDetails = (pub) => {
+    navigation.navigate('DetailPage', {item: pub},
+    );
+  };
+
     return(
       <Layout style={styles.container}>
             <Header/>
@@ -52,23 +57,9 @@ export default function HomePage({ navigation }) {
           setSearchTerm(pub)
         }}
         />
-      {pubs.filter((pub) => {
-        if(searchTerm == "") {
-          return pub
-        }else if (pub.name.includes(searchTerm)) {
-          return pub
-        }
-      }).map((pub) => {
-        return(
-          <ScrollView>
-             <PubCard navigation={navigation} key={pub.id} />
-          </ScrollView>
-        )
-      })
-    }
-
-                {/* {toggle ? (
+       {toggle ? (
               <ScrollView>
+                   
                     <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
@@ -83,9 +74,34 @@ export default function HomePage({ navigation }) {
                     category="h6">Kartvy</Text>
                 </TouchableOpacity>
             </Layout>
-              <PubCard navigation={navigation}/>
-                    </ScrollView>
-
+            
+            {pubs.filter(pub => pub.name.includes(searchTerm)).map(filteredPubs => (
+            <TouchableOpacity
+            key={filteredPubs.id}
+            onPress={() => {
+                navigateDetails(filteredPubs);
+              }}>
+            <Layout style={styles.pubCard}>
+                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
+                    <Text category="h5" style={styles.pubText}>{filteredPubs.name}</Text>
+                      <Text style={styles.pubText}>{filteredPubs.adress}</Text>
+                    {filteredPubs.quantity <= filteredPubs.maxQuantity/3 ? (
+                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                    ) : filteredPubs.quantity >= filteredPubs.maxQuantity/3*2 ? (        
+                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                        ) : (
+                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                        )}
+                </Layout>
+            <Image
+                    style={styles.imgLogo}
+                    resizeMode="contain"
+                    source={{uri: filteredPubs.image}}
+                />
+            </Layout>
+            </TouchableOpacity>
+  ))}
+  </ScrollView>
                 ) : (
                   <ScrollView>
                   <Layout style={styles.rowBox}>
@@ -105,15 +121,23 @@ export default function HomePage({ navigation }) {
           </Layout>
             <PubMap navigation={navigation}/>
             </ScrollView>
-                )} */}
+           
+                )} 
                 </Layout>
 
     )}
 
 const styles = StyleSheet.create({
-container: {
+  container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
+},
+pubContainer: {
+  flex: 1,
+  justifyContent: "center",
+  backgroundColor: theme['color-primary-100'],
+  alignContent: "center",
+  flexDirection: "column",
 },
 rowBox: {
     backgroundColor: theme['color-primary-100'],
@@ -125,6 +149,11 @@ rowBox: {
     fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
   },
+  pubText: {
+    fontFamily: 'Montserrat_400Regular', 
+    marginVertical: 10,
+    marginHorizontal: 10,
+},
   textCurrent: {
     fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
@@ -133,10 +162,26 @@ rowBox: {
   },
   input: {
     marginHorizontal: 10,
-    position: 'relative',
-    top: -30,
     borderRadius: 15
   },
+  quantity: {
+    fontFamily: 'Montserrat_400Regular', 
+    marginVertical: 10,
+    marginHorizontal: 10,
+},
+pubCard: {
+    backgroundColor: theme['color-primary-500'],
+    marginHorizontal: 10,
+    marginVertical: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderRadius: 5,
+    padding: 10,
+},
+imgLogo: {
+    height: 100,
+    width: 100,
+},
 })
 
 
