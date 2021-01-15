@@ -1,9 +1,10 @@
 
 import React, { useState} from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { Layout, Text, Select, SelectItem, Button} from '@ui-kitten/components';
+import { Layout, Text, Select, SelectItem, Button, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
-import LoginAdmin from '../components/loginAdmin'
+import LoginAdmin from './landingPageAdmin'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const cities =  [
     "Göteborg",
@@ -16,6 +17,11 @@ export const LandingPage = ({ navigation }) => {
     const navigateDetails = () => {
       navigation.navigate('HomePage');
     };
+
+      
+  const goToLoginPage = () => {
+    navigation.navigate('LandingPageAdmin');
+  };
   
 
     const [selectedIndex, setSelectedIndex] = useState({
@@ -29,6 +35,12 @@ export const LandingPage = ({ navigation }) => {
 
     return (
         <Layout style={styles.container}>
+                    <TouchableOpacity
+        onPress={() => {
+            goToLoginPage();
+        }}>
+             <Icon name="log-in-outline" fill="#FE9C41" style={styles.icon}/>
+        </TouchableOpacity>
         <Image
           style={styles.imgLogo}
           resizeMode="contain"
@@ -76,7 +88,6 @@ export const LandingPage = ({ navigation }) => {
                     style={styles.buttonText}>Gå vidare</Text>
               </Button>
              )}
-             <LoginAdmin />
 
       </Layout>
    )     
@@ -93,8 +104,15 @@ container: {
 },
 imgLogo: {
     alignSelf: "center",
-    marginTop: 50, 
+    marginTop: 30, 
     width: 250,
+},
+icon: {
+    width: 35,
+    height: 35,
+    alignSelf: 'flex-end',
+    marginVertical: 50,
+    marginHorizontal: 10
 },
 select: {
     width: 300,
