@@ -20,11 +20,6 @@ export default function LoginAdmin({navigation}) {
         }}>
              <Icon name="arrow-back-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
-              <Image
-          style={styles.imgLogo}
-          resizeMode="contain"
-          source={require('../assets/images/krogkollen.png')}
-        />
 
   <Text style={styles.text}>
     E-mail
@@ -58,23 +53,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme['color-primary-100'],
     alignContent: "center",
-},
-imgLogo: {
-  alignSelf: "center",
-  marginTop: 30, 
-  width: 250,
+    justifyContent: 'center'
 },
 icon: {
     width: 35,
     height: 35,
-    alignSelf: 'flex-end',
-    marginVertical: 50,
-    marginHorizontal: 10
+    alignSelf: 'flex-start',
+    marginHorizontal: 10,
 },
   text: {
     fontFamily: 'Montserrat_400Regular',
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 20,
   },
   input: {
     marginHorizontal: 10,
