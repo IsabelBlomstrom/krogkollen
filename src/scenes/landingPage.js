@@ -101,18 +101,17 @@ container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
     alignContent: "center",
+    justifyContent: 'center'
 },
 imgLogo: {
     alignSelf: "center",
-    marginTop: 30, 
     width: 250,
 },
 icon: {
     width: 35,
     height: 35,
     alignSelf: 'flex-end',
-    marginVertical: 50,
-    marginHorizontal: 10
+    marginHorizontal: 10,
 },
 select: {
     width: 300,
