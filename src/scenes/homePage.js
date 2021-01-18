@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Layout, Text, Input, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import PubCard from '../components/pubCard';
@@ -7,6 +7,7 @@ import Header from '../components/header'
 import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
 import firebase from 'firebase'
+import MapView, { Callout, Marker } from 'react-native-maps';
 
 const SearchIcon = (props) => (
   <Icon {...props} name='search-outline'/>
@@ -102,7 +103,9 @@ export default function HomePage({ navigation }) {
             </TouchableOpacity>
   ))}
   </ScrollView>
+
                 ) : (
+
                   <ScrollView>
                   <Layout style={styles.rowBox}>
                   <TouchableOpacity
@@ -119,7 +122,58 @@ export default function HomePage({ navigation }) {
                   style={styles.textCurrent}
                   category="h6">Kartvy</Text>
           </Layout>
-            <PubMap navigation={navigation}/>
+
+      {/*THIS IS WHERE MAP STARTS*/}
+
+      <Layout style={styles.container}>
+          <MapView
+          style={styles.map}
+          initialRegion={{
+          latitude: 57.708870,
+          longitude: 11.974560,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+    }}
+  >
+
+{/*MARKER AND CALLOUT FOR ALL PUBS FILTERED FOR SEARCH*/}
+
+{pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
+
+     <Marker
+      coordinate={{
+        latitude: searchedPubs.coordinate.latitude,
+        longitude: searchedPubs.coordinate.longitude
+      }}
+      >
+             <Callout 
+              key={searchedPubs.id}
+              style={{justifyContent: 'center'}}
+              width={150} height={80}
+              onPress={() => {
+              navigateDetails(searchedPubs);
+              }}>
+           <TouchableOpacity>
+               <Text
+                category="h6"
+                style={styles.textPopup}
+                >
+                {searchedPubs.name}</Text>
+                <Text
+                style={styles.textPopup}>
+                {searchedPubs.adress}</Text>
+                <Text
+                style={styles.textPopup}>
+                {searchedPubs.quantity}/{searchedPubs.maxQuantity}</Text>
+           </TouchableOpacity>
+          </Callout>
+        </Marker>
+))}
+     </MapView>
+   </Layout>
+      {/*MAP ENDS HERE*/}
+
+
             </ScrollView>
            
                 )} 
@@ -132,6 +186,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme['color-primary-100'],
 },
+  map: {
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    marginVertical: 10,
+    height: Dimensions.get('window').height/2,
+  },
 pubContainer: {
   flex: 1,
   justifyContent: "center",
@@ -149,6 +209,10 @@ rowBox: {
     fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
   },
+  textPopup: {
+  fontFamily: 'Montserrat_400Regular', 
+  color: 'black',
+},
   pubText: {
     fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
