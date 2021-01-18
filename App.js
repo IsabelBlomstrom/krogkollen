@@ -8,19 +8,13 @@ import {
 } from '@expo-google-fonts/montserrat';
 import {AppNavigator} from './src/navigation/appNavigation';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import firebase from 'firebase';
+import app from './src/base';
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    var uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+// firebase.firestore().collection('pub').add({
+//   name: 'isabel',
+//   adress: 'blabla',
+//   quantity: '30/20'
+// })
 
 export default function App() {
   useFonts({ // lägg i en useEffect
