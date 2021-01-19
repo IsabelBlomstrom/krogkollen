@@ -17,13 +17,14 @@ export default function LoginAdmin({navigation}) {
   };
 
   return(
-    <Layout style={styles.container}>
-              <TouchableOpacity
+    <Layout style={styles.outerContainer}>
+                    <TouchableOpacity
         onPress={() => {
             goToLandingPage();
         }}>
              <Icon name="arrow-back-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
+    <Layout style={styles.container}>
 
   <Text style={styles.text}>
     E-mail
@@ -48,22 +49,27 @@ export default function LoginAdmin({navigation}) {
         style={styles.buttonText}>Logga in</Text>
     </Button>
     </Layout>
-
+    </Layout>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme['color-primary-100'],
-    alignContent: "center",
-    justifyContent: 'center'
+outerContainer: {
+  flex: 2,
+  backgroundColor: theme['color-primary-100'],
+  },
+container: {
+  flex: 1,
+  backgroundColor: theme['color-primary-100'],
+  alignContent: "center",
+  justifyContent: 'center'
 },
 icon: {
-    width: 35,
-    height: 35,
-    alignSelf: 'flex-start',
-    marginHorizontal: 10,
+  width: 35,
+  height: 35,
+  marginHorizontal: 10,
+  alignSelf: 'flex-start',
+  marginTop: 40
 },
   text: {
     fontFamily: 'Montserrat_400Regular',
