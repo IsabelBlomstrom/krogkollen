@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Layout, Text} from '@ui-kitten/components';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
-import firebase from 'firebase';
+import app from '../base';
 
 export default function PubCard({ navigation }) {
     const [pubs, setPub] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
-            const db = firebase.firestore()
-            const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+            const db = app.firestore()
+            const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
             const url = ref.child('image.png');
             db.collection('pub')
             .onSnapshot((snapShot) => {

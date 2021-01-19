@@ -4,7 +4,7 @@ import { Layout, Text, Icon, Divider } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
 import Header from '../components/header'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import firebase from 'firebase';
+import app from '../base';
 
 export default function DetailPage({route, navigation}) {
   const { item } = route.params;
@@ -12,11 +12,11 @@ export default function DetailPage({route, navigation}) {
 
     const onUpdate = async () => {
       if(!starState) {
-        await firebase.firestore().collection("pub").doc(item.id).update({
+        await app.firestore().collection("pub").doc(item.id).update({
           favorite: true,
         });
       } else {
-        await firebase.firestore().collection("pub").doc(item.id).update({
+        await app.firestore().collection("pub").doc(item.id).update({
           favorite: false,
         })
       }

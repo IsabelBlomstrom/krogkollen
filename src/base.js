@@ -1,8 +1,9 @@
 import firebase from 'firebase';
 import '@firebase/firestore';
 import 'firebase/storage'
+import 'firebase/auth'
 
-  const config =  ({
+  const app = firebase.initializeApp({
     apiKey: "AIzaSyAlxmTlKpk7vm-iNYAEJyIDf0IAYCQ1OSE",
     authDomain: "krogkollen-f1cd6.firebaseapp.com",
     projectId: "krogkollen-f1cd6",
@@ -12,6 +13,8 @@ import 'firebase/storage'
     measurementId: "G-17G5MCP8DZ"
   });
 
-  export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+  export const auth = app.auth();
+  export default app;
+
 
 
