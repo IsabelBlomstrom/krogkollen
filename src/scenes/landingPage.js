@@ -34,13 +34,14 @@ export const LandingPage = ({ navigation }) => {
 
 
     return (
-        <Layout style={styles.container}>
-                    <TouchableOpacity
+        <Layout style={styles.outerContainer}>
+        <TouchableOpacity
         onPress={() => {
             goToLoginPage();
         }}>
              <Icon name="log-in-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
+        <Layout style={styles.container}>
         <Image
           style={styles.imgLogo}
           resizeMode="contain"
@@ -90,10 +91,15 @@ export const LandingPage = ({ navigation }) => {
              )}
 
       </Layout>
+      </Layout>
    )     
 }
 
 const styles = StyleSheet.create({
+outerContainer: {
+    flex: 2,
+    backgroundColor: theme['color-primary-100'],
+    },
 container: {
     flex: 1,
     backgroundColor: theme['color-primary-100'],
@@ -107,8 +113,9 @@ imgLogo: {
 icon: {
     width: 35,
     height: 35,
-    alignSelf: 'flex-end',
     marginHorizontal: 10,
+    alignSelf: 'flex-end',
+    marginTop: 40
 },
 select: {
     width: 300,
