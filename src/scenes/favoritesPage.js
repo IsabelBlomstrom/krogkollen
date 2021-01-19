@@ -50,7 +50,13 @@ fetchData();
                 <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
                     <Text category="h5" style={styles.pubText}>{pub.name}</Text>
                     <Text style={styles.pubText}>{pub.adress}</Text>
-                    <Text style={styles.quantity}>{pub.quantity}/{pub.maxQuantity}</Text>
+                    {pub.quantity <= pub.maxQuantity/3 ? (
+                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                    ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
+                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        ) : (
+                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                        )}
                 </Layout>
                 <Image
                     style={styles.imgLogo}
