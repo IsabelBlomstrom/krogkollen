@@ -8,13 +8,8 @@ import {
 } from '@expo-google-fonts/montserrat';
 import {AppNavigator} from './src/navigation/appNavigation';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import app from './src/base';
+import { AuthProvider } from './src/authContext';
 
-// firebase.firestore().collection('pub').add({
-//   name: 'isabel',
-//   adress: 'blabla',
-//   quantity: '30/20'
-// })
 
 export default function App() {
   useFonts({ // lägg i en useEffect
@@ -26,8 +21,10 @@ export default function App() {
   return (
     <ApplicationProvider {...eva} 
     theme={{ ...eva.dark, ...theme }}>
+      <AuthProvider>
       <IconRegistry icons={EvaIconsPack} />
         <AppNavigator/>
+        </AuthProvider>
     </ApplicationProvider>
   );
 }

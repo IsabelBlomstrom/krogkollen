@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Layout, Text } from '@ui-kitten/components';
+import { StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { Layout, Text, Button } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
-import firebase from 'firebase'
+import app from '../base'
+import { useAuth } from '../authContext';
 
 
 export default function HomePageAdmin({ navigation }) {
-
   const [pubs, setPub] = useState([])
-
+  
   useEffect(() => {
       const fetchData = async () => {
-          const db = firebase.firestore()
-          const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+          const db = app.firestore()
+          const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
           const url = ref.child('image.png');
           db.collection('pub')
           .onSnapshot((snapShot) => {
@@ -29,6 +29,15 @@ export default function HomePageAdmin({ navigation }) {
       fetchData();
   }, [])
 
+
+  const logOffuser = () => {
+    app.auth().signOut().then(() => {
+     console.log("sign out succesful");
+     navigation.navigate('LandingPageAdmin')
+    }).catch((error) => {
+      Alert.alert("Något gick fel, försök igen senare");
+    });
+  }
   
 
   const navigateDetails = (pub) => {
@@ -39,8 +48,13 @@ export default function HomePageAdmin({ navigation }) {
     return(
       <Layout style={styles.container}>
             <Header/>
+
+            <Button
+            onPress={() => {
+              logOffuser();
+            }}
+            >logga ut</Button>
               <ScrollView>
-                   
                     <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
