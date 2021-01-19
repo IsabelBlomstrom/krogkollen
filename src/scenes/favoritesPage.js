@@ -5,7 +5,7 @@ import FavoriteCard from '../components/favoriteCard'
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
-import firebase from 'firebase'
+import app from '../base'
 import PubCard from '../components/pubCard';
 
 export default function FavoritesPage({navigation}) {
@@ -17,8 +17,8 @@ export default function FavoritesPage({navigation}) {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const db = firebase.firestore()
-      const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+      const db = app.firestore()
+      const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
       const url = ref.child('image.png');
       db.collection("pub").where("favorite", "==", true)
     .onSnapshot((snapShot) => {

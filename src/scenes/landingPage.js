@@ -95,9 +95,6 @@ export const LandingPage = ({ navigation }) => {
    )     
 }
 
-
-
-
 const styles = StyleSheet.create({
 outerContainer: {
     flex: 2,

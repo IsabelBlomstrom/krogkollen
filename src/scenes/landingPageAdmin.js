@@ -1,20 +1,45 @@
-import React from 'react'
-import { StyleSheet, Image } from 'react-native'
+import React, {useState, useRef} from 'react'
+import { StyleSheet, Image, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Layout, Text, Input, Button, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { useAuth } from '../authContext';
 
 export default function LoginAdmin({navigation}) {
+  const { login } = useAuth()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
-  
+  const toggleSecureEntry = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
+  const renderIcon = (props) => (
+    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+      <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'}/>
+    </TouchableWithoutFeedback>
+  );
+
+  async function handleSubmit () {
+    try {
+      setError("")
+      setLoading(true)
+      await login(email, password)
+      navigation.navigate('HomePageAdmin')
+    } catch {
+      setError()
+      Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord");
+    }
+    setLoading(false)
+  }
+
   const goToLandingPage = () => {
     navigation.navigate('LandingPage');
   };
 
-  const navigateDetails = () => {
-    navigation.navigate('HomePageAdmin');
-  };
 
   return(
     <Layout style={styles.outerContainer}>
@@ -31,18 +56,29 @@ export default function LoginAdmin({navigation}) {
   </Text>
   <Input 
   style={styles.input}
-  placeholder="E-mail"/>
+  placeholder="E-mail"
+  onChangeText={(userEmail) =>
+    setEmail(userEmail)
+  }
+ />
   <Text style={styles.text}>
     Lösenord
   </Text>
   <Input 
     style={styles.input}
-    placeholder="Lösenord"/>
+    placeholder="Lösenord"
+    autoCapitalize="none"
+    secureTextEntry={secureTextEntry}
+    accessoryRight={renderIcon}
+    onChangeText={(userPassword) =>
+      setPassword(userPassword)
+    }
+    />
     <Button 
     size="medium"
     style={styles.button}
     onPress={() => {
-      navigateDetails();
+      handleSubmit(email, password);
   }}>
     <Text
         category="h6" 

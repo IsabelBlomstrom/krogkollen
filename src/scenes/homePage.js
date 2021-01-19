@@ -6,8 +6,8 @@ import PubCard from '../components/pubCard';
 import Header from '../components/header'
 import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
-import firebase from 'firebase'
 import MapView, { Callout, Marker } from 'react-native-maps';
+import app from '../base'
 
 const SearchIcon = (props) => (
   <Icon {...props} name='search-outline'/>
@@ -21,8 +21,8 @@ export default function HomePage({ navigation }) {
 
   useEffect(() => {
       const fetchData = async () => {
-          const db = firebase.firestore()
-          const ref = firebase.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+          const db = app.firestore()
+          const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
           const url = ref.child('image.png');
           db.collection('pub')
           .onSnapshot((snapShot) => {
