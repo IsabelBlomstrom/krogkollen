@@ -48,12 +48,6 @@ export default function HomePageAdmin({ navigation }) {
     return(
       <Layout style={styles.container}>
             <Header/>
-
-            <Button
-            onPress={() => {
-              logOffuser();
-            }}
-            >logga ut</Button>
               <ScrollView>
                     <Layout style={styles.rowBox}>
                     <Text 
