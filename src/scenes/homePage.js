@@ -47,41 +47,46 @@ export default function HomePage({ navigation }) {
     );
   };
 
+
     return(
       <Layout style={styles.container}>
-            <Header/>
+         <Header/>
             <Input  
-        style={styles.input}
-        placeholder="Sök ..."
-        accessoryRight={SearchIcon}
-        onChangeText={(pub) => {
-          setSearchTerm(pub)
+            size='large'
+            style={styles.input}
+            placeholder="Sök ..."
+            accessoryRight={SearchIcon}
+            onChangeText={(pub) => {
+              setSearchTerm(pub)
         }}
         />
+
        {toggle ? (
-              <ScrollView>
+          <ScrollView>
                    
-                    <Layout style={styles.rowBox}>
-                    <Text 
+             <Layout style={styles.rowBox}>
+                 <Text 
                     style={styles.textCurrent}
                     category="h6">Listvy</Text>                
-                  <TouchableOpacity
-                  onPress={() => {
-                    switchComponent();
-                }}
-                >
+                      <TouchableOpacity
+                      onPress={() => {
+                        switchComponent();
+                    }}
+                    >
                     <Text 
                     style={styles.text}
                     category="h6">Kartvy</Text>
                 </TouchableOpacity>
             </Layout>
             
-            {pubs.filter(pub => pub.name.includes(searchTerm)).map(filteredPubs => (
-            <TouchableOpacity
-            key={filteredPubs.id}
-            onPress={() => {
-                navigateDetails(filteredPubs);
-              }}>
+           {pubs.filter(pub => pub.name.includes(searchTerm)).map(filteredPubs => (
+
+              <TouchableOpacity
+              key={filteredPubs.id}
+              onPress={() => {
+                  navigateDetails(filteredPubs);
+                }}>
+
             <Layout style={styles.pubCard}>
                 <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
                     <Text category="h5" style={styles.pubText}>{filteredPubs.name}</Text>
@@ -93,16 +98,16 @@ export default function HomePage({ navigation }) {
                         ) : (
                         <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
                         )}
-                </Layout>
-            <Image
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={{uri: filteredPubs.image}}
-                />
-            </Layout>
-            </TouchableOpacity>
-  ))}
-  </ScrollView>
+                    </Layout>
+                  <Image
+                          style={styles.imgLogo}
+                          resizeMode="contain"
+                          source={{uri: filteredPubs.image}}
+                      />
+              </Layout>
+          </TouchableOpacity>
+              ))}
+         </ScrollView>
 
                 ) : (
 
@@ -126,26 +131,30 @@ export default function HomePage({ navigation }) {
       {/*THIS IS WHERE MAP STARTS*/}
 
       <Layout style={styles.container}>
-          <MapView
-          style={styles.map}
-          initialRegion={{
-          latitude: 57.708870,
-          longitude: 11.974560,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-    }}
-  >
 
-{/*MARKER AND CALLOUT FOR ALL PUBS FILTERED FOR SEARCH*/}
+                    <MapView
+                    key={pubs.id}
+                    style={styles.map}
+                    initialRegion={{
+                    latitude: 57.708870,
+                    longitude: 11.974560,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                   }}
+            >
 
-{pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
 
-     <Marker
-      coordinate={{
-        latitude: searchedPubs.coordinate.latitude,
-        longitude: searchedPubs.coordinate.longitude
-      }}
-      >
+        {/*MARKER AND CALLOUT FOR ALL PUBS FILTERED FOR SEARCH*/}
+
+        {pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
+
+            <Marker
+            key={searchedPubs.id}
+              coordinate={{
+                latitude: searchedPubs.coordinate.latitude,
+                longitude: searchedPubs.coordinate.longitude
+              }}
+              >
              <Callout 
               key={searchedPubs.id}
               style={{justifyContent: 'center'}}
@@ -168,8 +177,11 @@ export default function HomePage({ navigation }) {
            </TouchableOpacity>
           </Callout>
         </Marker>
-))}
+
+
+      ))}
      </MapView>
+
    </Layout>
       {/*MAP ENDS HERE*/}
 
@@ -226,7 +238,8 @@ rowBox: {
   },
   input: {
     marginHorizontal: 10,
-    borderRadius: 15
+    borderRadius: 15,
+    
   },
   quantity: {
     fontFamily: 'Montserrat_400Regular', 
