@@ -50,24 +50,19 @@ export default function LoginAdmin({navigation}) {
              <Icon name="arrow-back-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
     <Layout style={styles.container}>
-
-  <Text style={styles.text}>
-    E-mail
-  </Text>
   <Input 
+  label="E-mail"
   style={styles.input}
-  placeholder="E-mail"
+  placeholder="exempel@info.com"
   onChangeText={(userEmail) =>
     setEmail(userEmail)
   }
  />
-  <Text style={styles.text}>
-    Lösenord
-  </Text>
   <Input 
+    label="Lösenord"
     style={styles.input}
-    placeholder="Lösenord"
     autoCapitalize="none"
+    placeholder="****"
     secureTextEntry={secureTextEntry}
     accessoryRight={renderIcon}
     onChangeText={(userPassword) =>
@@ -114,6 +109,7 @@ icon: {
   },
   input: {
     marginHorizontal: 10,
+    marginVertical: 10,
   },
   button: {
     backgroundColor: theme['color-info-500'],
