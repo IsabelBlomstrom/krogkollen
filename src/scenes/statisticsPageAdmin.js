@@ -8,7 +8,7 @@ import { useAuth } from '../authContext';
 import AdminHeader from '../components/adminHeader';
 
 
-export default function HomePageAdmin({ navigation }) {
+export default function StatisticsPageAdmin({ navigation }) {
   const [pubs, setPubs] = useState([])
   const { logout, currentUser } = useAuth()
   const [error, setError] = useState("")
@@ -51,26 +51,21 @@ export default function HomePageAdmin({ navigation }) {
           <Icon fill="#FE9C41" style={styles.icon}name='log-out-outline'/>
         </TouchableOpacity>
             <AdminHeader/>
-            <Layout style={styles.rowBox}>
-                    <Text 
-                    style={styles.textCurrent}
-                    category="h6">Din statistik</Text>                
-            </Layout>  
+
               <ScrollView>
-            <Layout>
-            {currentUser && pubs.map(pub => {
-                <Image
-                style={styles.img}
-                resizeMode="contain"
-                source={{uri: pub.statistics}}
-            />
-            })}
-            </Layout>
- 
+                        <Text 
+                        style={styles.textCurrent}
+                        category="h6">Din statistik</Text>                
+              {currentUser && pubs.map(pub => (
+               <Image
+                    style={styles.imgLogo}
+                    resizeMode="contain"
+                    source={{uri: pub.statistics}}
+                />
+  ))}
+  </ScrollView>
 
-     </ScrollView>
-
-   </Layout>
+                </Layout>
 
     )}
 
@@ -79,34 +74,22 @@ export default function HomePageAdmin({ navigation }) {
         flex: 1,
         backgroundColor: theme['color-primary-100'],
     },
-    pubContainer: {
-      flex: 1,
-      justifyContent: "center",
-      backgroundColor: theme['color-primary-100'],
-      alignContent: "center",
-      flexDirection: "column",
-    },
-    rowBox: {
-        backgroundColor: theme['color-primary-100'],
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingBottom: '3%'
-      },
       textCurrent: {
         fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        alignSelf: 'center'
       },
-    img: {
-        height: 200,
-        width: 250,
+    imgLogo: {
+        height: 300,
+        marginVertical: 20
     }, 
     icon: {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 30,
+      marginTop: 40,
       marginRight: 10,
     },
 })

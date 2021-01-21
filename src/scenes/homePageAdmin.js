@@ -152,7 +152,7 @@ export default function HomePageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 30,
+      marginTop: 40,
       marginRight: 10,
     },
 })
