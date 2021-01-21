@@ -71,7 +71,7 @@ export default function LoginAdmin({navigation}) {
             ref={passwordRef}
             label="Lösenord"
             style={styles.input}
-            placeholder="****"
+            placeholder="*****"
             secureTextEntry={secureTextEntry}
             accessoryRight={renderIcon}
             onChangeText={(userPassword) => {

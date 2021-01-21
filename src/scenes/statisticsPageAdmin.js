@@ -58,6 +58,7 @@ export default function StatisticsPageAdmin({ navigation }) {
                         category="h6">Din statistik</Text>                
               {currentUser && pubs.map(pub => (
                <Image
+                    key={img.id}
                     style={styles.imgLogo}
                     resizeMode="contain"
                     source={{uri: pub.statistics}}

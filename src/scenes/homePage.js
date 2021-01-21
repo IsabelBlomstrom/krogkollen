@@ -79,7 +79,7 @@ export default function HomePage({ navigation }) {
                 </TouchableOpacity>
             </Layout>
             
-           {pubs.filter(pub => pub.name.toLowerCase().includes(searchTerm)).map(filteredPubs => (
+           {pubs.filter(pub => pub.name.toLowerCase().includes(searchTerm.toLowerCase())).map(filteredPubs => (
 
               <TouchableOpacity
               key={filteredPubs.id}
