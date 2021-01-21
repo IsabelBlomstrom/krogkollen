@@ -79,7 +79,7 @@ export default function HomePage({ navigation }) {
                 </TouchableOpacity>
             </Layout>
             
-           {pubs.filter(pub => pub.name.includes(searchTerm)).map(filteredPubs => (
+           {pubs.filter(pub => pub.name.toLowerCase().includes(searchTerm.toLowerCase())).map(filteredPubs => (
 
               <TouchableOpacity
               key={filteredPubs.id}
@@ -218,20 +218,20 @@ rowBox: {
     paddingBottom: '3%'
   },
   text: {
-    fontFamily: 'Montserrat_400Regular',
+    fontFamily: 'Montserrat-Regular',
     paddingTop: '3%',
   },
   textPopup: {
-  fontFamily: 'Montserrat_400Regular', 
+  fontFamily: 'Montserrat-Regular', 
   color: 'black',
 },
   pubText: {
-    fontFamily: 'Montserrat_400Regular', 
+    fontFamily: 'Montserrat-Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
 },
   textCurrent: {
-    fontFamily: 'Montserrat_400Regular',
+    fontFamily: 'Montserrat-Regular',
     paddingTop: '3%',
     color: theme['color-info-500'],
     textDecorationLine: 'underline'
@@ -242,7 +242,7 @@ rowBox: {
     
   },
   quantity: {
-    fontFamily: 'Montserrat_400Regular', 
+    fontFamily: 'Montserrat-Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
 },
