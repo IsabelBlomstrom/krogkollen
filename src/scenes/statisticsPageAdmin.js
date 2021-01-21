@@ -32,10 +32,6 @@ export default function HomePageAdmin({ navigation }) {
       fetchData();
   }, [])
 
-  const navigateDetails = (pub) => {
-    navigation.navigate('EditPageAdmin', {item: pub},
-    );
-  };
 
   async function handleLogOut () {
     setError("")
@@ -55,41 +51,26 @@ export default function HomePageAdmin({ navigation }) {
           <Icon fill="#FE9C41" style={styles.icon}name='log-out-outline'/>
         </TouchableOpacity>
             <AdminHeader/>
-              <ScrollView>
-                    <Layout style={styles.rowBox}>
+            <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
-                    category="h6">Dina anslutna krogar</Text>                
-            </Layout>            
-            {currentUser && pubs.map(pub => (
-            <TouchableOpacity
-            key={pub.id}
-            onPress={() => {
-                navigateDetails(pub);
-              }}>
-            <Layout style={styles.pubCard}>
-                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
-                    <Text category="h5" style={styles.pubText}>{pub.name}</Text>
-                      <Text style={styles.pubText}>{pub.name}</Text>
-                    {pub.quantity <= pub.maxQuantity/3 ? (
-                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                    ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
-                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                        ) : (
-                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                        )}
-                </Layout>
-            <Image
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={{uri: pub.image}}
-                />
+                    category="h6">Din statistik</Text>                
+            </Layout>  
+              <ScrollView>
+            <Layout>
+            {currentUser && pubs.map(pub => {
+                <Image
+                style={styles.img}
+                resizeMode="contain"
+                source={{uri: pub.statistics}}
+            />
+            })}
             </Layout>
-            </TouchableOpacity>
-  ))}
-  </ScrollView>
+ 
 
-                </Layout>
+     </ScrollView>
+
+   </Layout>
 
     )}
 
@@ -111,42 +92,15 @@ export default function HomePageAdmin({ navigation }) {
         justifyContent: 'space-around',
         paddingBottom: '3%'
       },
-      text: {
-        fontFamily: 'Montserrat_400Regular',
-        paddingTop: '3%',
-      },
-      pubText: {
-        fontFamily: 'Montserrat_400Regular', 
-        marginVertical: 10,
-        marginHorizontal: 10,
-    },
       textCurrent: {
         fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
         textDecorationLine: 'underline'
       },
-      input: {
-        marginHorizontal: 10,
-        borderRadius: 15
-      },
-      quantity: {
-        fontFamily: 'Montserrat_400Regular', 
-        marginVertical: 10,
-        marginHorizontal: 10,
-    },
-    pubCard: {
-        backgroundColor: theme['color-primary-500'],
-        marginHorizontal: 10,
-        marginVertical: 10,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        borderRadius: 5,
-        padding: 10,
-    },
-    imgLogo: {
-        height: 100,
-        width: 100,
+    img: {
+        height: 200,
+        width: 250,
     }, 
     icon: {
       height: 30,
