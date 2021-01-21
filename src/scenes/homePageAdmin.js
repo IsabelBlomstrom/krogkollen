@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
-import Header from '../components/header'
 import { ScrollView } from 'react-native-gesture-handler';
 import app from '../base'
 import { useAuth } from '../authContext';
@@ -153,7 +152,7 @@ export default function HomePageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 30,
+      marginTop: 40,
       marginRight: 10,
     },
 })
