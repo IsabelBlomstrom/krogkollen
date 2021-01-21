@@ -1,17 +1,20 @@
 import React, {useState, useRef} from 'react'
 import { StyleSheet, Image, Alert, TouchableWithoutFeedback } from 'react-native'
-import { Layout, Text, Input, Button, Icon } from '@ui-kitten/components';
+import { Layout, Text, Input, Icon, Button } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useAuth } from '../authContext';
 
 export default function LoginAdmin({navigation}) {
-  const { login } = useAuth()
+  const { login, currentUser } = useAuth()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -33,6 +36,8 @@ export default function LoginAdmin({navigation}) {
       setError()
       Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord");
     }
+    emailRef.current.clear()
+    passwordRef.current.clear()
     setLoading(false)
   }
 
@@ -50,27 +55,30 @@ export default function LoginAdmin({navigation}) {
              <Icon name="arrow-back-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
     <Layout style={styles.container}>
-  <Input 
-  label="E-mail"
-  style={styles.input}
-  placeholder="exempel@info.com"
-  onChangeText={(userEmail) =>
-    setEmail(userEmail)
-  }
- />
-  <Input 
-    label="Lösenord"
-    style={styles.input}
-    autoCapitalize="none"
-    placeholder="****"
-    secureTextEntry={secureTextEntry}
-    accessoryRight={renderIcon}
-    onChangeText={(userPassword) =>
-      setPassword(userPassword)
-    }
-    />
+      
+          <Input
+          defaultValue=""
+          ref={emailRef}
+          label="E-mail"
+          style={styles.input}
+          placeholder="exempel@info.com"
+          onChangeText={(userEmail) => {
+            setEmail(userEmail);
+          }}
+          />
+          <Input 
+            defaultValue=""
+            ref={passwordRef}
+            label="Lösenord"
+            style={styles.input}
+            placeholder="****"
+            secureTextEntry={secureTextEntry}
+            accessoryRight={renderIcon}
+            onChangeText={(userPassword) => {
+              setPassword(userPassword);
+            }}
+            />
     <Button 
-    size="medium"
     style={styles.button}
     onPress={() => {
       handleSubmit(email, password);
@@ -81,6 +89,7 @@ export default function LoginAdmin({navigation}) {
     </Button>
     </Layout>
     </Layout>
+    
   )
 }
 
