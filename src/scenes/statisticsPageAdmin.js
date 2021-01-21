@@ -58,7 +58,7 @@ export default function StatisticsPageAdmin({ navigation }) {
                         category="h6">Din statistik</Text>                
               {currentUser && pubs.map(pub => (
                <Image
-                    key={img.id}
+                    key={pub.id}
                     style={styles.imgLogo}
                     resizeMode="contain"
                     source={{uri: pub.statistics}}
@@ -76,7 +76,7 @@ export default function StatisticsPageAdmin({ navigation }) {
         backgroundColor: theme['color-primary-100'],
     },
       textCurrent: {
-        fontFamily: 'Montserrat_400Regular',
+        fontFamily: 'Montserrat-Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
         textDecorationLine: 'underline',

@@ -112,7 +112,7 @@ icon: {
   marginTop: 40
 },
   text: {
-    fontFamily: 'Montserrat_400Regular',
+    fontFamily: 'Montserrat-Regular',
     marginHorizontal: 10,
     marginVertical: 20,
   },
@@ -126,7 +126,7 @@ icon: {
     marginTop: 40,
   },
   buttonText: {
-    fontFamily: 'Montserrat_400Regular',
+    fontFamily: 'Montserrat-Regular',
     margin: 0,
   }
 })
