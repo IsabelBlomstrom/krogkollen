@@ -11,7 +11,7 @@ export default function LoginAdmin({navigation}) {
   const [password, setPassword] = useState()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -34,7 +34,7 @@ export default function LoginAdmin({navigation}) {
       navigation.navigate('HomePageAdmin')
     } catch {
       setError()
-      Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord");
+      error("Det gick inte att logga in. Kontrollera användarnamn och lösenord");
     }
     emailRef.current.clear()
     passwordRef.current.clear()

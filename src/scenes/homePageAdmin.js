@@ -14,46 +14,30 @@ export default function HomePageAdmin({ navigation }) {
   const [error, setError] = useState("")
   
   useEffect(() => {
-      const fetchData = async () => {
-          const db = app.firestore()
-          const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
-          const url = ref.child('image.png');
-           db.collection('pub').where('owner', '==', currentUser.uid).get()
-          .then(snapShot => {
-            const newPub = snapShot.docs.map((doc) => ({
-              id: doc.id,
-              url,
-              ...doc.data()
-          }))
-          setPubs(newPub)
-      })
-      }
-      
-      fetchData();
-  }, [])
+    const fetchData = async () => {
+        const db = app.firestore()
+        const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+        const url = ref.child('image.png');
+         db.collection('pub').where('owner', '==', currentUser.uid)
+         .onSnapshot(snapShot => {
+          const newPub = snapShot.docs.map((doc) => ({
+            id: doc.id,
+            url,
+            ...doc.data()
+        }))
+        setPubs(newPub)
+    })
+    }
+    
+    fetchData();
+}, [])
 
   const navigateDetails = (pub) => {
     navigation.navigate('EditPageAdmin', {item: pub},
     );
   };
-
-  async function handleLogOut () {
-    setError("")
-    try {
-      await logout();
-      navigation.navigate('LandingPageAdmin')
-    } catch {
-      setError("Failed to log out")
-    }
-  }
     return(
       <Layout style={styles.container}>
-        <TouchableOpacity
-        onPress={() => {
-          handleLogOut();
-        }}>
-          <Icon fill="#FE9C41" style={styles.icon}name='log-out-outline'/>
-        </TouchableOpacity>
             <AdminHeader/>
               <ScrollView>
                     <Layout style={styles.rowBox}>
@@ -109,7 +93,6 @@ export default function HomePageAdmin({ navigation }) {
         backgroundColor: theme['color-primary-100'],
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingBottom: '3%'
       },
       text: {
         fontFamily: 'Montserrat-Regular',
@@ -148,11 +131,4 @@ export default function HomePageAdmin({ navigation }) {
         height: 100,
         width: 100,
     }, 
-    icon: {
-      height: 30,
-      width: 30,
-      alignSelf: "flex-end",
-      marginTop: 40,
-      marginRight: 10,
-    },
 })

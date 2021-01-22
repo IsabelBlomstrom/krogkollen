@@ -44,12 +44,6 @@ export default function StatisticsPageAdmin({ navigation }) {
   }
     return(
       <Layout style={styles.container}>
-        <TouchableOpacity
-        onPress={() => {
-          handleLogOut();
-        }}>
-          <Icon fill="#FE9C41" style={styles.icon}name='log-out-outline'/>
-        </TouchableOpacity>
             <AdminHeader/>
 
               <ScrollView>
