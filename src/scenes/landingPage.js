@@ -18,7 +18,6 @@ export const LandingPage = ({ navigation }) => {
       navigation.navigate('HomePage');
     };
 
-      
   const goToLoginPage = () => {
     navigation.navigate('LandingPageAdmin');
   };
