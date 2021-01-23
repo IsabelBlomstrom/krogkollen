@@ -1,8 +1,8 @@
 import React, {useState, useRef} from 'react'
-import { StyleSheet, Image, Alert, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet, Keyboard, Alert, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native'
 import { Layout, Text, Input, Icon, Button } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; 
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useAuth } from '../authContext';
 
 export default function LoginAdmin({navigation}) {
@@ -54,42 +54,49 @@ export default function LoginAdmin({navigation}) {
         }}>
              <Icon name="arrow-back-outline" fill="#FE9C41" style={styles.icon}/>
         </TouchableOpacity>
-    <Layout style={styles.container}>
-      
-          <Input
-          defaultValue=""
-          ref={emailRef}
-          label="E-mail"
-          style={styles.input}
-          placeholder="exempel@info.com"
-          onChangeText={(userEmail) => {
-            setEmail(userEmail);
-          }}
-          />
-          <Input 
-            defaultValue=""
-            ref={passwordRef}
-            label="Lösenord"
-            style={styles.input}
-            placeholder="*****"
-            secureTextEntry={secureTextEntry}
-            accessoryRight={renderIcon}
-            onChangeText={(userPassword) => {
-              setPassword(userPassword);
-            }}
-            />
-    <Button 
-    style={styles.button}
-    onPress={() => {
-      handleSubmit(email, password);
-  }}>
-    <Text
-        category="h6" 
-        style={styles.buttonText}>Logga in</Text>
-    </Button>
+
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView
+          behavior="padding"
+          style={styles.container}
+          >
+              <Input
+              defaultValue=""
+              ref={emailRef}
+              label="E-mail"
+              style={styles.input}
+              placeholder="exempel@info.com"
+              onChangeText={(userEmail) => {
+                setEmail(userEmail);
+              }}
+              />
+              <Input 
+                defaultValue=""
+                ref={passwordRef}
+                label="Lösenord"
+                style={styles.input}
+                placeholder="*****"
+                secureTextEntry={secureTextEntry}
+                accessoryRight={renderIcon}
+                onChangeText={(userPassword) => {
+                  setPassword(userPassword);
+                }}
+                />
+          <Button 
+            style={styles.button}
+            onPress={() => {
+              handleSubmit(email, password);
+           }}>
+          <Text
+              category="h6" 
+              style={styles.buttonText}>Logga in</Text>
+          </Button>
+
+       </KeyboardAvoidingView>
+     </TouchableWithoutFeedback>
+
     </Layout>
-    </Layout>
-    
+
   )
 }
 
@@ -102,7 +109,7 @@ container: {
   flex: 1,
   backgroundColor: theme['color-primary-100'],
   alignContent: "center",
-  justifyContent: 'center'
+  justifyContent: 'center',
 },
 icon: {
   width: 35,
