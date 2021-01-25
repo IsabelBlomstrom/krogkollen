@@ -6,10 +6,9 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useAuth } from '../authContext';
 
 export default function LoginAdmin({navigation}) {
-  const { login, currentUser } = useAuth()
+  const { login } = useAuth()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const emailRef = useRef();
@@ -27,19 +26,19 @@ export default function LoginAdmin({navigation}) {
   );
 
   async function handleSubmit () {
-    try {
-      setError("")
-      setLoading(true)
-      await login(email, password)
-      navigation.navigate('HomePageAdmin')
-    } catch {
-      setError("Det gick inte att logga in. Kontrollera användarnamn och lösenord")
-      Alert.alert(error);
+      try {
+        setLoading(true)
+        await login(email, password)
+        navigation.navigate('HomePageAdmin')
+      } catch {
+        Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord")
+      }
+      emailRef.current.clear()
+      passwordRef.current.clear()
+      setLoading(false)
     }
-    emailRef.current.clear()
-    passwordRef.current.clear()
-    setLoading(false)
-  }
+
+  
 
   const goToLandingPage = () => {
     navigation.navigate('LandingPage');
@@ -71,7 +70,7 @@ export default function LoginAdmin({navigation}) {
               }}
               />
               <Input 
-                defaultValue=""
+              defaultValue=""
                 ref={passwordRef}
                 label="Lösenord"
                 style={styles.input}
