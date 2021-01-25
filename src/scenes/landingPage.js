@@ -128,11 +128,11 @@ button: {
 text: {
     marginBottom: 20,
     marginHorizontal: 15,
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     color:"white"
 },
 buttonText: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     margin: 0,
 },
 })

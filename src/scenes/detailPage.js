@@ -157,20 +157,20 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   heading: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingVertical: '2%'
   },
   text: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%'
   },
   infoText: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
     width: 200
   },
   quantity: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
 },
   link: {

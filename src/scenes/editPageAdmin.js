@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   heading: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     color: theme['color-info-500'],
     textDecorationLine: 'underline'
   },
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   text: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     marginVertical: 10
   },
   link: {

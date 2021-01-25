@@ -77,7 +77,7 @@ export default function StatisticsPageAdmin({ navigation }) {
         backgroundColor: theme['color-primary-100'],
     },
       textCurrent: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
         textDecorationLine: 'underline',

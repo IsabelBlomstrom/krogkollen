@@ -113,16 +113,16 @@ export default function HomePageAdmin({ navigation }) {
         justifyContent: 'space-around',
       },
       text: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
       },
       pubText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'Montserrat_400Regular', 
         marginVertical: 10,
         marginHorizontal: 10,
     },
       textCurrent: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
         textDecorationLine: 'underline',
@@ -133,7 +133,7 @@ export default function HomePageAdmin({ navigation }) {
         borderRadius: 15
       },
       quantity: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'Montserrat_400Regular', 
         marginVertical: 10,
         marginHorizontal: 10,
     },

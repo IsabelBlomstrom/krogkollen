@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
       alignContent: "center",
   },
   text: {
-      fontFamily: 'Montserrat-Regular', 
+      fontFamily: 'Montserrat_400Regular', 
       marginVertical: 10,
       marginHorizontal: 10,
   },
   quantity: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
     color: theme['color-success-400']
