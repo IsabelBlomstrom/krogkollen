@@ -83,18 +83,18 @@ const styles = StyleSheet.create({
     paddingBottom: '3%'
   },
   text: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
     color: theme['color-info-500'],
     textDecorationLine: 'underline',
   },
   pubText: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
 },
 quantity: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
     color: theme['color-success-400']

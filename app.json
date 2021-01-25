@@ -3,10 +3,12 @@
   "displayName": "krogkollen",
   "expo": {
     "name": "krogkollen",
+    "owner": "krogkollenapp",
     "slug": "krogkollen",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": ""
   }
 }

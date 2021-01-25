@@ -218,20 +218,20 @@ rowBox: {
     paddingBottom: '3%'
   },
   text: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
   },
   textPopup: {
-  fontFamily: 'Montserrat-Regular', 
+  fontFamily: 'Montserrat_400Regular', 
   color: 'black',
 },
   pubText: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
 },
   textCurrent: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
     paddingTop: '3%',
     color: theme['color-info-500'],
     textDecorationLine: 'underline'
@@ -242,7 +242,7 @@ rowBox: {
     
   },
   quantity: {
-    fontFamily: 'Montserrat-Regular', 
+    fontFamily: 'Montserrat_400Regular', 
     marginVertical: 10,
     marginHorizontal: 10,
 },
