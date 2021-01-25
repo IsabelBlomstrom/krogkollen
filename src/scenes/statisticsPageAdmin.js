@@ -91,7 +91,7 @@ export default function StatisticsPageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 25,
+      marginTop: 40,
       marginRight: 10,
     },
 })
