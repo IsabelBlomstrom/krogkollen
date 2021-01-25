@@ -36,8 +36,26 @@ export default function HomePageAdmin({ navigation }) {
     navigation.navigate('EditPageAdmin', {item: pub},
     );
   };
+
+
+  async function handleLogOut () {
+    setError("")
+    try {
+      await logout();
+      navigation.navigate('LandingPageAdmin')
+    } catch {
+      setError("Det gick inte att logga ut just nu, försök igen senare")
+      Alert.alert(error)
+    }
+  }
     return(
       <Layout style={styles.container}>
+         <TouchableOpacity
+        onPress={() => {
+          handleLogOut();
+        }}>
+          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
+        </TouchableOpacity>
             <AdminHeader/>
               <ScrollView>
                     <Layout style={styles.rowBox}>
@@ -107,7 +125,8 @@ export default function HomePageAdmin({ navigation }) {
         fontFamily: 'Montserrat-Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        alignSelf: 'center'
       },
       input: {
         marginHorizontal: 10,
@@ -131,4 +150,11 @@ export default function HomePageAdmin({ navigation }) {
         height: 100,
         width: 100,
     }, 
+    icon: {
+      height: 30,
+      width: 30,
+      alignSelf: "flex-end",
+      marginTop: 25,
+      marginRight: 10,
+    },
 })

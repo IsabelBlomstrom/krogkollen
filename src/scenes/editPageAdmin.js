@@ -10,11 +10,13 @@ import { useAuth } from '../authContext';
 import AdminHeader from '../components/adminHeader'
 
 export default function EditPageAdmin({route, navigation}) {
-  const { item } = route.params;
-  const [newName, setNewName] = useState(item.name);
-  const [pubInfo, setPubInfo] = useState(item.info);
-  const [changeAdress, setChangeAdress] = useState(item.adress);
+  const { item } = route.params
+  const [newName, setNewName] = useState(item.name)
+  const [pubInfo, setPubInfo] = useState(item.info)
+  const [changeAdress, setChangeAdress] = useState(item.adress)
   const [changeUrl, setChangeUrl] = useState(item.url)
+  const [error, setError] = useState("")
+  const { logout } = useAuth();
 
   const handleLinkPress = () => {
     Linking.openURL(`${item.url}`);
@@ -34,11 +36,28 @@ const onUpdatePubInfo = () => {
     return setWithMerge;
   }
 
+
+  async function handleLogOut () {
+    setError("")
+    try {
+      await logout();
+      navigation.navigate('LandingPageAdmin')
+    } catch {
+      setError("Det gick inte att logga ut just nu, försök igen senare")
+      Alert.alert(error)
+    }
+  }
+
   return(
     <Layout style={styles.container}>
+       <TouchableOpacity
+        onPress={() => {
+          handleLogOut();
+        }}>
+          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
+        </TouchableOpacity>
       <AdminHeader/>
     <Layout style={styles.topMenu}>
-   
     <TouchableOpacity
         onPress={() => {navigation.pop()}}>
             <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
@@ -159,6 +178,13 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     fontFamily: 'Montserrat-Regular',
+  },
+  icon: {
+    height: 30,
+    width: 30,
+    alignSelf: "flex-end",
+    marginTop: 25,
+    marginRight: 10,
   },
 })
 

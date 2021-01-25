@@ -39,11 +39,18 @@ export default function StatisticsPageAdmin({ navigation }) {
       await logout();
       navigation.navigate('LandingPageAdmin')
     } catch {
-      setError("Failed to log out")
+      setError("Det gick inte att logga ut just nu, försök igen senare")
+      Alert.alert(error)
     }
   }
     return(
       <Layout style={styles.container}>
+         <TouchableOpacity
+        onPress={() => {
+          handleLogOut();
+        }}>
+          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
+        </TouchableOpacity>
             <AdminHeader/>
 
               <ScrollView>
@@ -84,7 +91,7 @@ export default function StatisticsPageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 40,
+      marginTop: 25,
       marginRight: 10,
     },
 })
