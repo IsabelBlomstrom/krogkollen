@@ -58,11 +58,9 @@ export default function HomePageAdmin({ navigation }) {
         </TouchableOpacity>
             <AdminHeader/>
               <ScrollView>
-                    <Layout style={styles.rowBox}>
                     <Text 
                     style={styles.textCurrent}
                     category="h6">Dina anslutna krogar</Text>                
-            </Layout>            
             {currentUser && pubs.map(pub => (
             <TouchableOpacity
             key={pub.id}
@@ -107,11 +105,6 @@ export default function HomePageAdmin({ navigation }) {
       alignContent: "center",
       flexDirection: "column",
     },
-    rowBox: {
-        backgroundColor: theme['color-primary-100'],
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-      },
       text: {
         fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
@@ -140,7 +133,7 @@ export default function HomePageAdmin({ navigation }) {
     pubCard: {
         backgroundColor: theme['color-primary-500'],
         marginHorizontal: 10,
-        marginVertical: 10,
+        marginVertical: 20,
         flexDirection: "row",
         justifyContent: "space-between",
         borderRadius: 5,
@@ -154,7 +147,7 @@ export default function HomePageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 25,
+      marginTop: 40,
       marginRight: 10,
     },
 })

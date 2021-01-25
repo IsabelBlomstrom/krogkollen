@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import { StyleSheet, Linking, Image, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Alert, Dimensions
+import React, {useState} from 'react'
+import { StyleSheet, Linking, Image, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Alert
 } from 'react-native'
 import { Layout, Text, Icon, Divider, Input, Button } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
-import Header from '../components/header'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import  app  from '../base';
 import { useAuth } from '../authContext';
@@ -54,7 +53,7 @@ const onUpdatePubInfo = () => {
         onPress={() => {
           handleLogOut();
         }}>
-          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
+          <Icon fill="#FE9C41" style={styles.logoutIcon} name='log-out-outline'/>
         </TouchableOpacity>
       <AdminHeader/>
     <Layout style={styles.topMenu}>
@@ -62,14 +61,14 @@ const onUpdatePubInfo = () => {
         onPress={() => {navigation.pop()}}>
             <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
         </TouchableOpacity>
-        <Text category="h6" style={styles.heading}>Redigera krog</Text>
+        <Text category="h6" style={styles.textCurrent}>Redigera krog</Text>
         <Icon name="edit-outline" fill="#FE9C41" style={styles.icon}/>
         
     </Layout> 
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView
-        behavior={"position"}
-        style={{flex: 1, 
-          paddingTop: 10,    
+        behavior={"padding"}
+        style={{flex: 1, paddingTop: 10
       }}
        >
     <ScrollView 
@@ -96,14 +95,11 @@ const onUpdatePubInfo = () => {
               setPubInfo(pub);
             }}
             >{item.info}</Input>
-            <TouchableOpacity onPress={() => {handleLinkPress()}}>
             <Input style={styles.link}
               onChangeText={(urlInfo) => {
               setChangeUrl(urlInfo);
             }} 
-              >{item.url}</Input> 
-            </TouchableOpacity>
-           
+              >{item.url}</Input>            
             </Layout>
             <Image
                     style={styles.imgLogo}
@@ -112,6 +108,7 @@ const onUpdatePubInfo = () => {
                 /> 
                   </ScrollView> 
     </KeyboardAvoidingView> 
+    </TouchableWithoutFeedback>
             <Button
             size="medium"
             style={styles.button}
@@ -120,7 +117,7 @@ const onUpdatePubInfo = () => {
              
             }}
             >
-              <Text style={styles.buttontext}>Spara ändringar</Text>
+              <Text style={styles.buttontext} category="h6">Spara ändringar</Text>
               </Button>
     </Layout>
 
@@ -137,11 +134,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: theme['color-primary-100'],
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  heading: {
+  textCurrent: {
     fontFamily: 'Montserrat_400Regular',
     color: theme['color-info-500'],
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    alignSelf: 'center'
   },
   imageBox: {
     backgroundColor: theme['color-primary-100'],
@@ -150,12 +149,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 200
   },
-    icon: {
-    height: 30,
-    width: 30,
-    marginHorizontal: 5,
-    marginBottom: 10,
-},
   imgLogo: {
     height: 100,
     width: 100,
@@ -170,9 +163,8 @@ const styles = StyleSheet.create({
     paddingTop: '3%'
   },
   button: {
-    marginTop: 20,
-    marginBottom: 20, 
-    marginHorizontal: 20,
+    marginVertical: 40,
+    marginHorizontal: 10,
     backgroundColor: theme['color-info-500'],
     fontFamily: 'Montserrat-Regular', 
   },
@@ -183,9 +175,15 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     alignSelf: "flex-end",
-    marginTop: 25,
     marginRight: 10,
   },
+  logoutIcon: {
+      height: 30,
+      width: 30,
+      alignSelf: "flex-end",
+      marginTop: 40,
+      marginRight: 10,
+  }
 })
 
 
