@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Regular', 
   },
   buttontext: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat_400Regular',
   },
   icon: {
     height: 30,
