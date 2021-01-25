@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import { default as theme } from './AppTheme.json'; // <-- Import app theme
@@ -11,26 +11,8 @@ import {AppLoading} from 'expo'
 
 
 
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//   'Montserrat-Regular': require('./src/assets/Montserrat-Regular.ttf'),
-//   });
-//   };
-
-
 export default function App() {
   
-  // const [fontloaded,setfontloaded]=useState(false);
-
-  // if(!fontloaded){
-  //   return(
-  //     <AppLoading
-  //     startAsync={fetchFonts}
-  //     onFinish={()=>setfontloaded(true)}
-  //     />
-  //   )
-  // }
-
   let [fontsLoaded] = useFonts({Montserrat_400Regular})
 
   if(!fontsLoaded) {

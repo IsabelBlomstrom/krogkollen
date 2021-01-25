@@ -14,28 +14,29 @@ export default function HomePageAdmin({ navigation }) {
   const [error, setError] = useState("")
   
   useEffect(() => {
-      const fetchData = async () => {
-          const db = app.firestore()
-          const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
-          const url = ref.child('image.png');
-           db.collection('pub').where('owner', '==', currentUser.uid).get()
-          .then(snapShot => {
-            const newPub = snapShot.docs.map((doc) => ({
-              id: doc.id,
-              url,
-              ...doc.data()
-          }))
-          setPubs(newPub)
-      })
-      }
-      
-      fetchData();
-  }, [])
+    const fetchData = async () => {
+        const db = app.firestore()
+        const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
+        const url = ref.child('image.png');
+         db.collection('pub').where('owner', '==', currentUser.uid)
+         .onSnapshot(snapShot => {
+          const newPub = snapShot.docs.map((doc) => ({
+            id: doc.id,
+            url,
+            ...doc.data()
+        }))
+        setPubs(newPub)
+    })
+    }
+    
+    fetchData();
+}, [])
 
   const navigateDetails = (pub) => {
     navigation.navigate('EditPageAdmin', {item: pub},
     );
   };
+
 
   async function handleLogOut () {
     setError("")
@@ -43,16 +44,17 @@ export default function HomePageAdmin({ navigation }) {
       await logout();
       navigation.navigate('LandingPageAdmin')
     } catch {
-      setError("Failed to log out")
+      setError("Det gick inte att logga ut just nu, försök igen senare")
+      Alert.alert(error)
     }
   }
     return(
       <Layout style={styles.container}>
-        <TouchableOpacity
+         <TouchableOpacity
         onPress={() => {
           handleLogOut();
         }}>
-          <Icon fill="#FE9C41" style={styles.icon}name='log-out-outline'/>
+          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
         </TouchableOpacity>
             <AdminHeader/>
               <ScrollView>
@@ -109,7 +111,6 @@ export default function HomePageAdmin({ navigation }) {
         backgroundColor: theme['color-primary-100'],
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingBottom: '3%'
       },
       text: {
         fontFamily: 'Montserrat_400Regular',
@@ -124,7 +125,8 @@ export default function HomePageAdmin({ navigation }) {
         fontFamily: 'Montserrat_400Regular',
         paddingTop: '3%',
         color: theme['color-info-500'],
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        alignSelf: 'center'
       },
       input: {
         marginHorizontal: 10,
@@ -152,7 +154,7 @@ export default function HomePageAdmin({ navigation }) {
       height: 30,
       width: 30,
       alignSelf: "flex-end",
-      marginTop: 40,
+      marginTop: 25,
       marginRight: 10,
     },
 })
