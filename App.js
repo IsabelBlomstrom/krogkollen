@@ -9,7 +9,6 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo'
 
 
-
 const fetchFonts = () => {
   return Font.loadAsync({
   'Montserrat-Regular': require('./src/assets/Montserrat-Regular.ttf'),

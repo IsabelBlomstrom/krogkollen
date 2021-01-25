@@ -33,8 +33,8 @@ export default function LoginAdmin({navigation}) {
       await login(email, password)
       navigation.navigate('HomePageAdmin')
     } catch {
-      setError()
-      Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord");
+      setError("Det gick inte att logga in. Kontrollera användarnamn och lösenord")
+      Alert.alert(error);
     }
     emailRef.current.clear()
     passwordRef.current.clear()
