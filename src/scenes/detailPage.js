@@ -46,8 +46,8 @@ export default function DetailPage({route, navigation}) {
             <Divider/>
             <Text style={{paddingTop: 10}}>{item.info}</Text>
             <TouchableOpacity onPress={() => {handleLinkPress()}}>
-            <Text>Besök hemsidan för meny och mer:</Text>
-            <Text style={styles.link}>{item.urlShort}</Text>
+            <Text style={{paddingTop: 10}}>Besök hemsidan för meny och mer:</Text>
+            <Text category="h6" style={styles.link}>{item.urlShort}</Text>
             </TouchableOpacity>
           </Layout>
         </Layout>
@@ -175,7 +175,9 @@ const styles = StyleSheet.create({
 },
   link: {
     color: theme['color-info-500'],
-    paddingTop: '3%'
+    fontFamily: 'Montserrat_400Regular', 
+    paddingTop: '3%',
+    
   },
   star: {
   width: 35,
