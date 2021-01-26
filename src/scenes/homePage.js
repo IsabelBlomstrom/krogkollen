@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Layout, Text, Input, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
-import PubCard from '../components/pubCard';
 import Header from '../components/header'
-import PubMap from '../components/pubMap'
 import { ScrollView } from 'react-native-gesture-handler';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import app from '../base'

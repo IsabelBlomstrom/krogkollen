@@ -6,43 +6,22 @@ import { ScrollView } from 'react-native-gesture-handler';
 import app from '../base'
 import { useAuth } from '../authContext';
 import AdminHeader from '../components/adminHeader';
-
+import { auth } from '../base'
 
 export default function HomePageAdmin({ navigation }) {
-  const [pubs, setPubs] = useState([])
-  const { logout, currentUser } = useAuth()
+  const { logout, pubs, currentUser } = useAuth()
   const [error, setError] = useState("")
-  
-  useEffect(() => {
-    const fetchData = async () => {
-        const db = app.firestore()
-        const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
-        const url = ref.child('image.png');
-         db.collection('pub').where('owner', '==', currentUser.uid)
-         .onSnapshot(snapShot => {
-          const newPub = snapShot.docs.map((doc) => ({
-            id: doc.id,
-            url,
-            ...doc.data()
-        }))
-        setPubs(newPub)
-    })
-    }
-    
-    fetchData();
-}, [])
 
   const navigateDetails = (pub) => {
     navigation.navigate('EditPageAdmin', {item: pub},
     );
   };
 
-
   async function handleLogOut () {
     setError("")
     try {
       await logout();
-      navigation.navigate('LandingPageAdmin')
+      navigation.navigate('LandingPage')
     } catch {
       setError("Det gick inte att logga ut just nu, försök igen senare")
       Alert.alert(error)
