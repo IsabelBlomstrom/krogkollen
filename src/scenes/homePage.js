@@ -147,6 +147,11 @@ export default function HomePage({ navigation }) {
         {pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
 
             <Marker
+            pinColor={
+              searchedPubs.quantity <= searchedPubs.maxQuantity/3 ? theme['color-success-400'] 
+            : searchedPubs.quantity >= searchedPubs.maxQuantity/3*2 ? theme['color-danger-400'] 
+            : theme['color-warning-400']
+          }
             key={searchedPubs.id}
               coordinate={{
                 latitude: searchedPubs.coordinate.latitude,
