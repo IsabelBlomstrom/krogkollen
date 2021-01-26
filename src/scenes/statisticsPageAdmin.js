@@ -3,41 +3,19 @@ import { StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
 import { ScrollView } from 'react-native-gesture-handler';
-import app from '../base'
 import { useAuth } from '../authContext';
 import AdminHeader from '../components/adminHeader';
 
 
 export default function StatisticsPageAdmin({ navigation }) {
-  const [pubs, setPubs] = useState([])
-  const { logout, currentUser } = useAuth()
+  const { logout, currentUser, pubs } = useAuth()
   const [error, setError] = useState("")
-  
-  useEffect(() => {
-      const fetchData = async () => {
-          const db = app.firestore()
-          const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
-          const url = ref.child('image.png');
-           db.collection('pub').where('owner', '==', currentUser.uid).get()
-          .then(snapShot => {
-            const newPub = snapShot.docs.map((doc) => ({
-              id: doc.id,
-              url,
-              ...doc.data()
-          }))
-          setPubs(newPub)
-      })
-      }
-      
-      fetchData();
-  }, [])
-
 
   async function handleLogOut () {
     setError("")
     try {
       await logout();
-      navigation.navigate('LandingPageAdmin')
+      navigation.navigate('LandingPage')
     } catch {
       setError("Det gick inte att logga ut just nu, försök igen senare")
       Alert.alert(error)
