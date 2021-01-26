@@ -16,6 +16,7 @@ export default function EditPageAdmin({route, navigation}) {
   const [changeUrl, setChangeUrl] = useState(item.url)
   const [error, setError] = useState("")
   const { logout } = useAuth();
+  const [beenPressed, setBeenPressed] = useState(true)
 
 const onUpdatePubInfo = () => {
     const db = app.firestore()
@@ -27,7 +28,9 @@ const onUpdatePubInfo = () => {
         info: pubInfo,
   
     });
+    setTimeout(() => {
     Alert.alert("Ändringar sparade")
+    }, 1000)
     return setWithMerge;
   }
 
@@ -106,11 +109,15 @@ const onUpdatePubInfo = () => {
     </KeyboardAvoidingView> 
     </TouchableWithoutFeedback>
             <Button
+            disabled={!beenPressed}
             size="medium"
             style={styles.button}
             onPress={() => {
               onUpdatePubInfo();
-             
+              setBeenPressed(false)
+              setTimeout(() => {
+                setBeenPressed(true)
+              }, 1000)
             }}
             >
               <Text style={styles.buttontext} category="h6">Spara ändringar</Text>
