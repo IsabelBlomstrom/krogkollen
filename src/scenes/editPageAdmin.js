@@ -17,10 +17,6 @@ export default function EditPageAdmin({route, navigation}) {
   const [error, setError] = useState("")
   const { logout } = useAuth();
 
-  const handleLinkPress = () => {
-    Linking.openURL(`${item.url}`);
-  }
-
 const onUpdatePubInfo = () => {
     const db = app.firestore()
     let urlRef = db.collection("pub").doc(item.id);
@@ -40,7 +36,7 @@ const onUpdatePubInfo = () => {
     setError("")
     try {
       await logout();
-      navigation.navigate('LandingPageAdmin')
+      navigation.navigate("LandingPage")
     } catch {
       setError("Det gick inte att logga ut just nu, försök igen senare")
       Alert.alert(error)

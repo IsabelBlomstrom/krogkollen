@@ -4,6 +4,7 @@ import { Layout, Text, Input, Icon, Button } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; 
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useAuth } from '../authContext';
+import  {auth}  from '../base'
 
 export default function LoginAdmin({navigation}) {
   const { login } = useAuth()
@@ -29,6 +30,8 @@ export default function LoginAdmin({navigation}) {
       try {
         setLoading(true)
         await login(email, password)
+        console.log(auth.currentUser);
+        console.log("loggade in");
         navigation.navigate('HomePageAdmin')
       } catch {
         Alert.alert("Det gick inte att logga in. Kontrollera användarnamn och lösenord")
@@ -37,8 +40,6 @@ export default function LoginAdmin({navigation}) {
       passwordRef.current.clear()
       setLoading(false)
     }
-
-  
 
   const goToLandingPage = () => {
     navigation.navigate('LandingPage');
