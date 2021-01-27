@@ -1,16 +1,17 @@
 import React, {createContext, useState, useEffect} from 'react'
 import { useContext } from 'react'
-import { Alert } from 'react-native'
 import { auth } from './base' 
 import app from './base'
 
 const AuthContext = createContext()
+
 
 export function useAuth() {
     return useContext(AuthContext)
 }
 
 export function AuthProvider({children}) {
+    
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
     const [pubs, setPubs] = useState([])

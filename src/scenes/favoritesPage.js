@@ -7,12 +7,15 @@ import { ScrollView } from 'react-native-gesture-handler';
 import app from '../base'
 
 export default function FavoritesPage({navigation}) {
+
   const [pubs, setPub] = useState([])
 
   const navigateDetails = (pub) => {
     navigation.navigate('DetailPage', {item: pub},
     );
   };
+
+
   useEffect(() => {
     const fetchData = async () => {
       const db = app.firestore()
@@ -31,6 +34,7 @@ export default function FavoritesPage({navigation}) {
 fetchData();
   }, [])
 
+
   return(
     <Layout style={styles.container}>
         <Header/>
@@ -44,24 +48,25 @@ fetchData();
             onPress={() => {
                 navigateDetails(pub);
               }}>
-            <Layout style={styles.pubCard}>
-                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
-                    <Text category="h5" style={styles.pubText}>{pub.name}</Text>
-                    <Text style={styles.pubText}>{pub.adress}</Text>
-                    {pub.quantity <= pub.maxQuantity/3 ? (
-                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                    ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
-                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                        ) : (
-                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
-                        )}
-                </Layout>
-                <Image
+                {/*PUB CARDS THAT ARE MARKED AS FAVORITES*/}
+              <Layout style={styles.pubCard}>
+                  <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
+                      <Text category="h5" style={styles.pubText}>{pub.name}</Text>
+                      <Text style={styles.pubText}>{pub.adress}</Text>
+                        {pub.quantity <= pub.maxQuantity/3 ? (
+                            <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                            ) : pub.quantity >= pub.maxQuantity/3*2 ? (        
+                            <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                            ) : (
+                            <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{pub.quantity}/{pub.maxQuantity}</Text>
+                            )}
+                  </Layout>
+                  <Image
                     style={styles.imgLogo}
                     resizeMode="contain"
                     source={{uri: pub.image}}
-                />
-            </Layout>
+                  />
+              </Layout>
             </TouchableOpacity>
    )}
     </ScrollView>
