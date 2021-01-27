@@ -20,7 +20,13 @@ export function AuthProvider({children}) {
           const unsubscribe = auth.onAuthStateChanged(async (user) => {
             setCurrentUser(user)
             setLoading(false)
-              if(user) {
+            let sessionEnding = null;
+            let date = new Date()
+            if(user === null) {
+                sessionEnding && clearTimeout(sessionEnding);
+                sessionEnding = null;
+            }
+              else if(user) {
                 const db = app.firestore()
                 const ref = app.storage().refFromURL('gs://krogkollen-f1cd6.appspot.com');
                 const url = ref.child('image.png');
@@ -33,9 +39,13 @@ export function AuthProvider({children}) {
                   }))
                   setPubs(newPub)
               })
-              } else {
-                  console.log("hittade ingen user");
+              user.getIdTokenResult().then((idToken) => {
+                const authenticationTime = idToken.claims.auth_time * 1000;
+                const sessionDuration = 1000 * 60 * 60 * 24;
+                const untilExpireTime = sessionDuration - (date - authenticationTime);
+                sessionEnding = setTimeout(() => auth.signOut(), untilExpireTime);
               }
+              )}
           });
           return unsubscribe;
       }, []);
