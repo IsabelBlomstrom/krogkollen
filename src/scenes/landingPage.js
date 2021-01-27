@@ -3,8 +3,8 @@ import React, { useState} from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Text, Select, SelectItem, Button, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
-import LoginAdmin from './landingPageAdmin'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const cities =  [
     "Göteborg",
@@ -15,13 +15,12 @@ const cities =  [
 export const LandingPage = ({ navigation }) => {
 
     const navigateDetails = () => {
-      navigation.navigate('HomePage');
+        navigation.navigate('HomePage');
     };
 
-  const goToLoginPage = () => {
+    const goToLoginPage = () => {
     navigation.navigate('LandingPageAdmin');
-  };
-  
+    };
 
     const [selectedIndex, setSelectedIndex] = useState({
         title: '',
@@ -33,23 +32,24 @@ export const LandingPage = ({ navigation }) => {
 
 
     return (
-        <Layout style={styles.outerContainer}>
-        <TouchableOpacity
-        onPress={() => {
-            goToLoginPage();
-        }}>
-             <Icon name="log-in-outline" fill="#FE9C41" style={styles.icon}/>
-        </TouchableOpacity>
-        <Layout style={styles.container}>
-        <Image
-          style={styles.imgLogo}
-          resizeMode="contain"
-          source={require('../assets/images/krogkollen.png')}
-        />
+      <Layout style={styles.outerContainer}>
+                <TouchableOpacity
+                onPress={() => {
+                    goToLoginPage();
+                }}>
+                    <Icon name="log-in-outline" fill="#FE9C41" style={styles.icon}/>
+                </TouchableOpacity>
 
-        
-        <Text style={styles.text}>Välj stad</Text>
-            <Select
+            <Layout style={styles.container}>
+                <Image
+                style={styles.imgLogo}
+                resizeMode="contain"
+                source={require('../assets/images/krogkollen.png')}
+                />
+               <Text style={styles.text}>Välj stad</Text>
+
+               {/*DROP DOWN MENU FOR THE CITIES*/}
+                <Select
                     placeholder={cities[0]}
                     size="large"
                     style={styles.select}
@@ -60,37 +60,36 @@ export const LandingPage = ({ navigation }) => {
                         });
                     }}>
                     {cities.map(renderOptions)}
-            </Select>
-        {selectedIndex.cities === 'Malmö' || selectedIndex.cities === 'Stockholm' ? (
-                <Layout style={{backgroundColor: theme['color-primary-100']}}>
-                <Text style={{color: theme['color-danger-400'], marginHorizontal: 15, paddingTop: 15}}>Kommer inom kort</Text>
-                <Button 
-                disabled="true"
-                size="medium"
-                style={styles.button}
-                >
-                <Text
-                    category="h6" 
-                    style={styles.buttonText}>Gå vidare</Text>
-                </Button>
-                </Layout>
-            ) : ( 
-                <Button 
-
-                size="medium"
-                style={styles.button}
-                onPress={() => {
-                    navigateDetails();
-                }}
-                >
-                <Text
-                    category="h6" 
-                    style={styles.buttonText}>Gå vidare</Text>
-              </Button>
-             )}
-
-      </Layout>
-      </Layout>
+                </Select>
+                
+                 {selectedIndex.cities === 'Malmö' || selectedIndex.cities === 'Stockholm' ? (
+                    <Layout style={{backgroundColor: theme['color-primary-100']}}>
+                        <Text style={{color: theme['color-danger-400'], marginHorizontal: 15, paddingTop: 15}}>Kommer inom kort</Text>
+                            <Button 
+                            disabled="true"
+                            size="medium"
+                            style={styles.button}
+                            >
+                            <Text
+                                category="h6" 
+                                style={styles.buttonText}>Gå vidare</Text>
+                            </Button>
+                    </Layout>
+                ) : ( 
+                    <Button 
+                        size="medium"
+                        style={styles.button}
+                        onPress={() => {
+                            navigateDetails();
+                        }}
+                         >
+                        <Text
+                            category="h6" 
+                            style={styles.buttonText}>Gå vidare</Text>
+                    </Button>
+                )}
+            </Layout>
+        </Layout>
    )     
 }
 

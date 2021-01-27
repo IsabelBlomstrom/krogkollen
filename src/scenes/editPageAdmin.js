@@ -1,5 +1,11 @@
 import React, {useState} from 'react'
-import { StyleSheet, Linking, Image, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Alert
+import { 
+  StyleSheet, 
+  Image, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  KeyboardAvoidingView, 
+  Alert
 } from 'react-native'
 import { Layout, Text, Icon, Divider, Input, Button } from '@ui-kitten/components'
 import { default as theme } from '../../AppTheme.json' // <-- Import app theme
@@ -9,6 +15,7 @@ import { useAuth } from '../authContext';
 import AdminHeader from '../components/adminHeader'
 
 export default function EditPageAdmin({route, navigation}) {
+
   const { item } = route.params
   const [newName, setNewName] = useState(item.name)
   const [pubInfo, setPubInfo] = useState(item.info)
@@ -16,6 +23,8 @@ export default function EditPageAdmin({route, navigation}) {
   const [changeUrl, setChangeUrl] = useState(item.url)
   const [error, setError] = useState("")
   const { logout } = useAuth();
+  const [beenPressed, setBeenPressed] = useState(true)
+
 
 const onUpdatePubInfo = () => {
     const db = app.firestore()
@@ -25,9 +34,10 @@ const onUpdatePubInfo = () => {
         url: changeUrl,
         adress: changeAdress,
         info: pubInfo,
-  
     });
+    setTimeout(() => {
     Alert.alert("Ändringar sparade")
+    }, 1000)
     return setWithMerge;
   }
 
@@ -43,6 +53,7 @@ const onUpdatePubInfo = () => {
     }
   }
 
+
   return(
     <Layout style={styles.container}>
        <TouchableOpacity
@@ -51,72 +62,82 @@ const onUpdatePubInfo = () => {
         }}>
           <Icon fill="#FE9C41" style={styles.logoutIcon} name='log-out-outline'/>
         </TouchableOpacity>
-      <AdminHeader/>
-    <Layout style={styles.topMenu}>
-    <TouchableOpacity
-        onPress={() => {navigation.pop()}}>
-            <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
-        </TouchableOpacity>
-        <Text category="h6" style={styles.textCurrent}>Redigera krog</Text>
-        <Icon name="edit-outline" fill="#FE9C41" style={styles.icon}/>
-        
-    </Layout> 
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView
-        behavior={"padding"}
-        style={{flex: 1, paddingTop: 10
-      }}
-       >
-    <ScrollView 
-    contentContainerStyle={{
-      flexGrow: 1,
-    }}>          
-          <Layout style={{backgroundColor: theme['color-primary-100'], marginVertical: 10, marginHorizontal: 10}}>
-            <Input style={styles.text} category="h4"
-            onChangeText={(name) => {
-              setNewName(name);
-            }}>{item.name}</Input>
-            <Divider/>
-            <Input 
-            size="medium"             
-            style={styles.text} category="h6"
-            onChangeText={(adressUpdate) => {
-              setChangeAdress(adressUpdate);
-            }}>{item.adress}</Input>
-            <Input 
-            size="large"         
-            multiline={true}
-            maxLength={200}
-            onChangeText={(pub) => {
-              setPubInfo(pub);
-            }}
-            >{item.info}</Input>
-            <Input style={styles.link}
-              onChangeText={(urlInfo) => {
-              setChangeUrl(urlInfo);
-            }} 
-              >{item.url}</Input>            
-            </Layout>
-            <Image
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={{uri: item.image}}
-                /> 
-                  </ScrollView> 
-    </KeyboardAvoidingView> 
-    </TouchableWithoutFeedback>
-            <Button
-            size="medium"
-            style={styles.button}
-            onPress={() => {
-              onUpdatePubInfo();
-             
-            }}
-            >
-              <Text style={styles.buttontext} category="h6">Spara ändringar</Text>
-              </Button>
-    </Layout>
 
+      <AdminHeader/>
+
+       <Layout style={styles.topMenu}>
+            <TouchableOpacity
+            onPress={() => {navigation.pop()}}>
+                <Icon fill="#FE9C41" name="arrow-ios-back-outline" style={styles.icon}/>
+            </TouchableOpacity>
+            <Text category="h6" style={styles.textCurrent}>Redigera krog</Text>
+            <Icon name="edit-outline" fill="#FE9C41" style={styles.icon}/>
+        </Layout> 
+
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <KeyboardAvoidingView
+                  behavior={"padding"}
+                  style={{flex: 1, paddingTop: 10
+                }}
+                >
+                <ScrollView 
+                  contentContainerStyle={{
+                  flexGrow: 1,
+                   }}>         
+
+                    {/*INPUT FIELDS FOR EDITING INFO IN ADMIN*/}
+
+                    <Layout style={{backgroundColor: theme['color-primary-100'], marginVertical: 10, marginHorizontal: 10}}>
+
+                          <Input style={styles.text} category="h4"
+                          onChangeText={(name) => {
+                            setNewName(name);
+                          }}>{item.name}</Input>
+                             <Divider/>
+                          <Input 
+                          size="medium"             
+                          style={styles.text} category="h6"
+                          onChangeText={(adressUpdate) => {
+                            setChangeAdress(adressUpdate);
+                          }}>{item.adress}</Input>
+                          <Input 
+                          size="large"         
+                          multiline={true}
+                          maxLength={200}
+                          onChangeText={(pub) => {
+                            setPubInfo(pub);
+                          }}
+                          >{item.info}</Input>
+                          <Input style={styles.link}
+                            onChangeText={(urlInfo) => {
+                            setChangeUrl(urlInfo);
+                          }} 
+                            >{item.url}</Input>        
+
+                      </Layout>
+                        <Image
+                          style={styles.imgLogo}
+                          resizeMode="contain"
+                          source={{uri: item.image}}
+                        /> 
+                   </ScrollView> 
+              </KeyboardAvoidingView> 
+          </TouchableWithoutFeedback>
+            <Button
+              disabled={!beenPressed}
+              size="medium"
+              style={styles.button}
+              onPress={() => {
+                  onUpdatePubInfo();
+                  setBeenPressed(false)
+                  setTimeout(() => {
+                    setBeenPressed(true)
+                  }, 1000)
+              }}
+              >
+              <Text style={styles.buttontext} category="h6">Spara ändringar</Text>
+           </Button>
+    </Layout>
   )
 }
 
@@ -137,13 +158,6 @@ const styles = StyleSheet.create({
     color: theme['color-info-500'],
     textDecorationLine: 'underline',
     alignSelf: 'center'
-  },
-  imageBox: {
-    backgroundColor: theme['color-primary-100'],
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 10,
-    height: 200
   },
   imgLogo: {
     height: 100,
