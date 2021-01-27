@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
 import { default as theme } from '../../AppTheme.json'; // <-- Import app theme
@@ -8,6 +8,7 @@ import AdminHeader from '../components/adminHeader';
 
 
 export default function StatisticsPageAdmin({ navigation }) {
+
   const { logout, currentUser, pubs } = useAuth()
   const [error, setError] = useState("")
 
@@ -21,33 +22,32 @@ export default function StatisticsPageAdmin({ navigation }) {
       Alert.alert(error)
     }
   }
+
+
     return(
       <Layout style={styles.container}>
          <TouchableOpacity
-        onPress={() => {
-          handleLogOut();
-        }}>
-          <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
+             onPress={() => {
+              handleLogOut();
+           }}>
+            <Icon fill="#FE9C41" style={styles.icon} name='log-out-outline'/>
         </TouchableOpacity>
             <AdminHeader/>
-
-              <ScrollView>
-                        <Text 
-                        style={styles.textCurrent}
-                        category="h6">Din statistik</Text>                
-              {currentUser && pubs.map(pub => (
-               <Image
-                    key={pub.id}
-                    style={styles.imgLogo}
-                    resizeMode="contain"
-                    source={{uri: pub.statistics}}
-                />
-  ))}
-  </ScrollView>
-
-                </Layout>
-
-    )}
+        <ScrollView>
+              <Text 
+                  style={styles.textCurrent}
+                  category="h6">Din statistik</Text>                
+         {currentUser && pubs.map(pub => (
+              <Image
+                  key={pub.id}
+                  style={styles.imgLogo}
+                  resizeMode="contain"
+                  source={{uri: pub.statistics}}
+              />
+          ))}
+        </ScrollView>
+     </Layout>
+)}
 
     const styles = StyleSheet.create({
       container: {

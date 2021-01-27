@@ -7,15 +7,18 @@ import { ScrollView } from 'react-native-gesture-handler';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import app from '../base'
 
+
 const SearchIcon = (props) => (
   <Icon {...props} name='search-outline'/>
 );
+
 
 export default function HomePage({ navigation }) {
 
   const [pubs, setPub] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [toggle, setToggle] = useState(true);
+
 
   useEffect(() => {
       const fetchData = async () => {
@@ -59,8 +62,9 @@ export default function HomePage({ navigation }) {
         }}
         />
 
+       {/*TOGGLE SWITCHES BETWEEN LIST VIEW AND MAP VIEW*/}
        {toggle ? (
-          <ScrollView>
+        <ScrollView>
                    
              <Layout style={styles.rowBox}>
                  <Text 
@@ -77,45 +81,50 @@ export default function HomePage({ navigation }) {
                 </TouchableOpacity>
             </Layout>
             
-           {pubs.filter(pub => pub.name.toLowerCase().includes(searchTerm.toLowerCase())).map(filteredPubs => (
+            {/*FILTER IS FOR SEARCH BAR TO FIND CORRECT PUBS*/}
+            {pubs.filter(pub => pub.name.toLowerCase().includes(searchTerm.toLowerCase())).map(filteredPubs => (
 
-              <TouchableOpacity
-              key={filteredPubs.id}
-              onPress={() => {
-                  navigateDetails(filteredPubs);
-                }}>
+                <TouchableOpacity
+                    key={filteredPubs.id}
+                    onPress={() => {
+                        navigateDetails(filteredPubs);
+                      }}>
 
-            <Layout style={styles.pubCard}>
-                <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
-                    <Text category="h5" style={styles.pubText}>{filteredPubs.name}</Text>
-                      <Text style={styles.pubText}>{filteredPubs.adress}</Text>
-                    {filteredPubs.quantity <= filteredPubs.maxQuantity/3 ? (
-                        <Text style={[styles.quantity, {color: theme['color-success-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
-                    ) : filteredPubs.quantity >= filteredPubs.maxQuantity/3*2 ? (        
-                        <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
-                        ) : (
-                        <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>{filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
-                        )}
-                    </Layout>
-                  <Image
+                      {/*RENDER ALL THE PUB CARDS IN LIST VIEW*/}
+                    <Layout style={styles.pubCard}>
+                        <Layout style={{backgroundColor: theme['color-primary-500'], borderRadius: 5}}> 
+                            <Text category="h5" style={styles.pubText}>{filteredPubs.name}</Text>
+                              <Text style={styles.pubText}>{filteredPubs.adress}</Text>
+                            {filteredPubs.quantity <= filteredPubs.maxQuantity/3 ? (
+                                <Text style={[styles.quantity, {color: theme['color-success-400']}]}>
+                                  {filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                                ) : filteredPubs.quantity >= filteredPubs.maxQuantity/3*2 ? (        
+                                <Text style={[styles.quantity, {color: theme['color-danger-400']}]}>
+                                  {filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                                ) : (
+                                <Text style={[styles.quantity, {color: theme['color-warning-400']}]}>
+                                  {filteredPubs.quantity}/{filteredPubs.maxQuantity}</Text>
+                                )}
+                            </Layout>
+                        <Image
                           style={styles.imgLogo}
                           resizeMode="contain"
                           source={{uri: filteredPubs.image}}
-                      />
-              </Layout>
-          </TouchableOpacity>
+                        />
+                    </Layout>
+                </TouchableOpacity>
               ))}
-         </ScrollView>
+          </ScrollView>
 
-                ) : (
+          ) : (
 
-                  <ScrollView>
-                  <Layout style={styles.rowBox}>
-                  <TouchableOpacity
-                onPress={() => {
-                  switchComponent();
-              }}
-              >
+        <ScrollView>
+          <Layout style={styles.rowBox}>
+              <TouchableOpacity
+                  onPress={() => {
+                    switchComponent();
+                }}
+                >
                   <Text 
                   style={styles.text}
                   category="h6">Listvy</Text>                
@@ -124,11 +133,11 @@ export default function HomePage({ navigation }) {
                   <Text 
                   style={styles.textCurrent}
                   category="h6">Kartvy</Text>
-          </Layout>
+         </Layout>
 
-      {/*THIS IS WHERE MAP STARTS*/}
+           {/*THIS IS WHERE MAP STARTS*/}
 
-      <Layout style={styles.container}>
+         <Layout style={styles.container}>
 
                     <MapView
                     key={pubs.id}
@@ -141,60 +150,56 @@ export default function HomePage({ navigation }) {
                    }}
             >
 
+         {/*MARKER AND CALLOUT FOR ALL PUBS FILTERED FOR SEARCH*/}
 
-        {/*MARKER AND CALLOUT FOR ALL PUBS FILTERED FOR SEARCH*/}
-
-        {pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
+         {pubs.filter(pubMarker => pubMarker.name.includes(searchTerm)).map(searchedPubs => (
 
             <Marker
-            pinColor={
-              searchedPubs.quantity <= searchedPubs.maxQuantity/3 ? theme['color-success-400'] 
-            : searchedPubs.quantity >= searchedPubs.maxQuantity/3*2 ? theme['color-danger-400'] 
-            : theme['color-warning-400']
-          }
-            key={searchedPubs.id}
-              coordinate={{
-                latitude: searchedPubs.coordinate.latitude,
-                longitude: searchedPubs.coordinate.longitude
-              }}
-              >
-             <Callout 
+              pinColor={
+                searchedPubs.quantity <= searchedPubs.maxQuantity/3 ? theme['color-success-400'] 
+              : searchedPubs.quantity >= searchedPubs.maxQuantity/3*2 ? theme['color-danger-400'] 
+              : theme['color-warning-400']
+              }
               key={searchedPubs.id}
-              style={{justifyContent: 'center'}}
-              width={150} height={80}
-              onPress={() => {
-              navigateDetails(searchedPubs);
-              }}>
-           <TouchableOpacity>
-               <Text
-                category="h6"
-                style={styles.textPopup}
-                >
-                {searchedPubs.name}</Text>
-                <Text
-                style={styles.textPopup}>
-                {searchedPubs.adress}</Text>
-                <Text
-                style={styles.textPopup}>
-                {searchedPubs.quantity}/{searchedPubs.maxQuantity}</Text>
-           </TouchableOpacity>
-          </Callout>
-        </Marker>
+                coordinate={{
+                  latitude: searchedPubs.coordinate.latitude,
+                  longitude: searchedPubs.coordinate.longitude
+                }}
+              >
+                <Callout 
+                  key={searchedPubs.id}
+                  style={{justifyContent: 'center'}}
+                  width={150} height={80}
+                  onPress={() => {
+                  navigateDetails(searchedPubs);
+                  }}>
+                    <TouchableOpacity>
+                        <Text
+                          category="h6"
+                          style={styles.textPopup}
+                          >
+                          {searchedPubs.name}
+                          </Text>
+                          <Text
+                          style={styles.textPopup}>
+                          {searchedPubs.adress}
+                          </Text>
+                          <Text
+                          style={styles.textPopup}>
+                          {searchedPubs.quantity}/{searchedPubs.maxQuantity}
+                          </Text>
+                    </TouchableOpacity>
+              </Callout>
+            </Marker>
+           ))}
+               </MapView>
+             </Layout>
+           {/*MAP ENDS HERE*/}
+         </ScrollView> 
+       )} 
+     </Layout>
 
-
-      ))}
-     </MapView>
-
-   </Layout>
-      {/*MAP ENDS HERE*/}
-
-
-            </ScrollView>
-           
-                )} 
-                </Layout>
-
-    )}
+ )}
 
 const styles = StyleSheet.create({
   container: {
@@ -207,13 +212,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: Dimensions.get('window').height/2,
   },
-pubContainer: {
-  flex: 1,
-  justifyContent: "center",
-  backgroundColor: theme['color-primary-100'],
-  alignContent: "center",
-  flexDirection: "column",
-},
 rowBox: {
     backgroundColor: theme['color-primary-100'],
     flexDirection: 'row',
@@ -242,7 +240,6 @@ rowBox: {
   input: {
     marginHorizontal: 10,
     borderRadius: 15,
-    
   },
   quantity: {
     fontFamily: 'Montserrat_400Regular', 

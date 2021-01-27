@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
-import { Layout, Icon } from '@ui-kitten/components';
-import { StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import React from 'react'
+import { Layout } from '@ui-kitten/components';
+import { StyleSheet, Image } from 'react-native';
 import { default as theme } from '../../AppTheme.json';
-import { useAuth } from '../authContext';
 
 
-export default function AdminHeader({ navigation}) {
+export default function AdminHeader() {
 
   return(
     <Layout style={styles.container}>
