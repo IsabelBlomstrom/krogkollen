@@ -17,14 +17,19 @@ Kör igång projektet med Expo
 
 Vänta tills localhost ger info "Starting Metro bundler". Öppna kameran på din telefon och scanna QR-koden som syns på localhost-sidan. Klicka på länken som dyker upp. Nu kommer projektet att starta upp i din telefon. Om något inte hämtats in ordentligt eller du vill ladda om appen; skaka telefonen och välj `"reload"` i menyn som dyker upp. 
 
+
 För att se admins UI, logga in med något av nedanstående:
 
 Tullen:
+
 E-mail: `admin@tullen.se`
+
 Lösenord: `tullen`
 
 Lilla Restaurangen:
+
 E-mail: `admin@lilla.se`
+
 Lösenord: `lillar`
 
 
